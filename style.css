@@ -1,0 +1,36 @@
+body {
+  font: 13px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.axis text{
+    font: Times;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/*Add Tooltip Type here*/
+
+div.tooltip {
+    color: white;
+    position: absolute;
+/*    text-align: center;*/
+    width: 60 px;
+    height: 28 px;
+    padding: 2 px;
+    font: 12 px sans-serif;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid black;
+    pointer-events: none;
+}
