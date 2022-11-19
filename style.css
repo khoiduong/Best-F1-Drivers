@@ -11,26 +11,16 @@ body {
 
 .dot {
   stroke: #000;
+  stroke-width: 0;
 }
 
-.axis text{
-    font: Times;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-
-/*Add Tooltip Type here*/
-
+/*sets dimensions and other properties of the tooltip*/
 div.tooltip {
-    color: white;
-    position: absolute;
-/*    text-align: center;*/
-    width: 60 px;
-    height: 28 px;
-    padding: 2 px;
-    font: 12 px sans-serif;
-    background: rgba(0, 0, 0, 0.8);
-    border: 2px solid black;
-    pointer-events: none;
+  width: 200px;
+  height: 130px;
+  padding: 1px;
+  font: 14px sans-serif;
+  background: lightgrey;
+  pointer-events: all;
+  position: absolute;
 }
