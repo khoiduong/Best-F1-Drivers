@@ -179,16 +179,16 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .attr("x", width/2)
         .style("text-anchor", "middle")
         .attr("font-size", "12px")
-        .text("Lap Time");
+        .text("Lap Time (Seconds)");
 
     svg.append("g")
         .append("text")
         .attr("class", "label")
         .attr("transform", "rotate(-90)")
         .attr("y", -50)
-        .attr("x", -180)
+        .attr("x", -130)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .attr("font-size", "12px")
-        .text("Driver Standing");   
+        .text("Driver Standing (Track Position)");   
 })
