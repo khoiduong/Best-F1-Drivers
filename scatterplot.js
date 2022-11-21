@@ -27,7 +27,6 @@
     var tooltip = d3.select("body")
         .append("div")	
         .attr("class", "tooltip")
-
       
        //Define Axis
     var xAxis = d3.axisBottom(xScale).tickPadding(2);
@@ -51,6 +50,15 @@
     }
 
 d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
+    let color_domain = []
+    for(let i = 0; i < data.length; i++){
+        if(!color_domain.includes(data[i]['teamname'])){
+            color_domain.push(data[i]['teamname']);
+        }
+    }
+    colors.domain(color_domain);
+    //console.log(color_domain);
+    
     // 0 to max gdp of data
     xScale.domain([90, d3.max(data, function (d) { return d.bestlaptime})]);
     // 0 to max ecc of data
@@ -98,6 +106,8 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     var newShift = shifting.selectAll("circle")
         .data(data);
     
+
+    
     // Adds all data to scatterplot, along with tooltip mouseover, mousemove and mouseout
     // Also added in the html and css portions to make the table on mouseover
     // Works with double click or ctrl click for zoom in or out
@@ -108,7 +118,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .attr("r", function(d) {return 10*Math.sqrt((d.driverpoints/5)/Math.PI);})
         .attr("cx", function(d) {return xScale(d.bestlaptime);})
         .attr("cy", function(d) {return yScale(d.driverstanding);})
-        .style("fill", function (d) { return colors(d.driverstanding); })
+        .style("fill", function (d) { return colors(d.teamname); })
         .on("mouseover", function (d) {
           tooltip
             .style("left", d3.event.pageX - 50 + "px")
