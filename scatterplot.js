@@ -1,8 +1,9 @@
-
+    let main_body_width = parseInt(d3.select("body").style("width"));
+    console.log(main_body_width)
     //Define Margin
     var margin = {left: 80, right: 80, top: 50, bottom: 50 }, 
-        width = 960 - margin.left -margin.right,
-        height = 540 - margin.top - margin.bottom;
+        width = main_body_width - margin.left -margin.right,
+        height = 600 - margin.top - margin.bottom;
 
     //Define Color
     // Schemecategory20 got removed in v4
@@ -22,6 +23,14 @@
 
     var yScale = d3.scaleLinear()
         .range([height, 0]);
+
+    var startDate = "1990-01-01";
+    var endDate = "2013-01-01";
+
+    var timelineScale = d3.scaleTime()
+        .domain([new Date(startDate), new Date(endDate)])
+        .range([margin.left, width+margin.left])
+        .nice();
     
     //Define Tooltip here
     var tooltip = d3.select("body")
@@ -31,6 +40,30 @@
        //Define Axis
     var xAxis = d3.axisBottom(xScale).tickPadding(2);
     var yAxis = d3.axisLeft(yScale).tickPadding(2);
+
+    var timelineAxis = d3.axisBottom(timelineScale)
+        .ticks(parseInt(endDate)-parseInt(startDate));
+
+    var timelineHeight = 100;
+    var timelinesvg = d3.select("body")
+        .append("svg")
+        .attr("width", main_body_width)
+        .attr("height", timelineHeight);
+
+    var timeX = timelinesvg.append("g")
+        .attr("class", "timeaxis")
+        .attr("transform", "translate(0," + 0 + ")")
+        .call(timelineAxis);
+           
+    function timelineZoomFunc() {
+        timeX.call(timelineAxis.scale(d3.event.transform.rescaleX(timelineScale)));
+    }
+
+    var timelinezoom = d3.zoom()
+        //.translateExtent([[0,0],[new Date(startDate), new Date(endDate)]])
+        .scaleExtent([1,1])
+        .on('zoom', timelineZoomFunc);
+
 // driverid,drivername,bestlaptime,yearbestlaptime,driverstanding,laptime2022,laptime2021,laptime2020,laptime2019
     //Get Data
     function rowConverter(data) {
@@ -87,14 +120,10 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     var shifting = svg.append("g")
         .classed("circles", true);
     
-
-    
     // edited version of the js file given to us
     var newShift = shifting.selectAll("circle")
         .data(data);
-    
 
-    
     // Adds all data to scatterplot, along with tooltip mouseover, mousemove and mouseout
     // Also added in the html and css portions to make the table on mouseover
     // Works with double click or ctrl click for zoom in or out
@@ -199,6 +228,9 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         shifting.selectAll("circle")
             .attr("transform", (d3.event.transform));
     }
+
+    
+    timelinesvg.call(timelinezoom);
     
     // call zoom on svg members of shifting
     shifting.call(zoom);
