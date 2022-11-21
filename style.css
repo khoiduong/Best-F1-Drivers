@@ -14,13 +14,21 @@ body {
   stroke-width: 0;
 }
 
-/*sets dimensions and other properties of the tooltip*/
-div.tooltip {
-  width: 200px;
-  height: 130px;
-  padding: 1px;
-  font: 14px sans-serif;
-  background: lightgrey;
-  pointer-events: all;
-  position: absolute;
+.tooltip {
+    position: absolute;
+    display: none;
+    min-width: 80px;
+    height: auto;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 14px;
+    text-align: left;
+/*            Following line is critical to make tooltip follow mouse*/
+    pointer-events: none;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    color: #d62728;
 }
