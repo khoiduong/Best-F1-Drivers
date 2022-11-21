@@ -36,8 +36,8 @@
     //Get Data
     function rowConverter(data) {
         return {
-            driverid : data.driverid,
-            drivername : +data.drivername,
+            driverid : +data.driverid,
+            drivername : data.drivername,
             bestlaptime: +data.bestlaptime,
             yearbestlaptime: +data.yearbestlaptime,
             driverstanding: +data.driverstanding,
@@ -46,7 +46,7 @@
             laptime2021: +data.laptime2021,
             teamid: +data.teamid,
             teamstanding: +data.teamstanding,
-            teamname: +data.teamname
+            teamname: data.teamname
         }
     }
 
@@ -114,7 +114,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
             .style("left", d3.event.pageX - 50 + "px")
             .style("top", d3.event.pageY - 70 + "px")
             .style("display", "inline-block")
-            .html("County: " + d.drivername + "<br/>" + "Population Density: " + d.teamname);
+            .html('Driver: ' + d.drivername + '<br/>' + 'Team: ' + d.teamname);
       })
       
       // Makes the tooltip follow the mouse when it is moved
