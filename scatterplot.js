@@ -27,8 +27,7 @@
     var tooltip = d3.select("body")
         .append("div")	
         .attr("class", "tooltip")
-        .style("pointer-events", "none")
-        .style("opacity", 0);
+
       
        //Define Axis
     var xAxis = d3.axisBottom(xScale).tickPadding(2);
@@ -45,10 +44,9 @@
             driverpoints: +data.driverpoints,
             laptime2022: +data.laptime2022,
             laptime2021: +data.laptime2021,
-            laptime2020: +data.laptime2020,
-            laptime2019: +data.laptime2019,
             teamid: +data.teamid,
-            teamstanding: +data.teamstanding
+            teamstanding: +data.teamstanding,
+            teamname: +data.teamname
         }
     }
 
@@ -111,6 +109,26 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .attr("cx", function(d) {return xScale(d.bestlaptime);})
         .attr("cy", function(d) {return yScale(d.driverstanding);})
         .style("fill", function (d) { return colors(d.driverstanding); })
+        .on("mouseover", function (d) {
+          tooltip
+            .style("left", d3.event.pageX - 50 + "px")
+            .style("top", d3.event.pageY - 70 + "px")
+            .style("display", "inline-block")
+            .html("County: " + d.drivername + "<br/>" + "Population Density: " + d.teamname);
+      })
+      
+      // Makes the tooltip follow the mouse when it is moved
+      .on('mousemove', function(d) {
+          tooltip
+            .style("top", (d3.event.pageY)+"px")
+            .style("left",(d3.event.pageX-28)+"px")
+
+      })
+    
+      // Event when mouse is not longer hovering over a county
+      .on("mouseout", function (d) {
+        tooltip.style("display", "none");
+      });
         
     
     
