@@ -60,7 +60,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     //console.log(color_domain);
     
     // 0 to max gdp of data
-    xScale.domain([90, d3.max(data, function (d) { return d.bestlaptime})]);
+    xScale.domain([d3.min(data, function (d) { return d.bestlaptime}) - 5, d3.max(data, function (d) { return d.bestlaptime}) + 5]);
     // 0 to max ecc of data
     yScale.domain([0, d3.max(data, function (d) { return d.driverstanding})]);
     
