@@ -2,7 +2,7 @@
     console.log(main_body_width)
     //Define Margin
     var margin = {left: 80, right: 80, top: 50, bottom: 50 }, 
-        width = main_body_width - margin.left -margin.right,
+        width = (2 * main_body_width / 3) - margin.left -margin.right,
         height = 600 - margin.top - margin.bottom;
 
     //Define Color
@@ -25,7 +25,7 @@
         .range([height, 0]);
 
     var startDate = "1990-01-01";
-    var endDate = "2013-01-01";
+    var endDate = "2010-01-01";
 
     var timelineScale = d3.scaleTime()
         .domain([new Date(startDate), new Date(endDate)])
@@ -60,7 +60,7 @@
     }
 
     var timelinezoom = d3.zoom()
-        //.translateExtent([[0,0],[new Date(startDate), new Date(endDate)]])
+        .translateExtent([[0,0],[new Date(startDate), new Date(endDate)]])
         .scaleExtent([1,1])
         .on('zoom', timelineZoomFunc);
 
