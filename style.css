@@ -15,20 +15,51 @@ body {
 }
 
 .tooltip {
-    position: absolute;
-    display: none;
-    min-width: 80px;
-    height: auto;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 14px;
-    text-align: left;
-/*            Following line is critical to make tooltip follow mouse*/
-    pointer-events: none;
-    color: white;
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 14px;
+  text-align: left;
+  /*            Following line is critical to make tooltip follow mouse*/
+  pointer-events: none;
+  color: white;
 }
 
 h1 {
-    text-align: center;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-    color: #d62728;
+  text-align: center;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  color: #d62728;
+}
+
+.endinfo {
+  background-color: lightgrey;
+  padding: 1rem;
+}
+
+.designed {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.names > div {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: red;
+}
+
+.names {
+  text-align: center;
+  color: blue;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 1.5rem;
 }
