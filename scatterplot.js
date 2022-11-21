@@ -41,6 +41,7 @@
     var xAxis = d3.axisBottom(xScale).tickPadding(2);
     var yAxis = d3.axisLeft(yScale).tickPadding(2);
 
+    //TODO: Scale up the size of timeline axis ticks and labels to make them stand out more
     var timelineAxis = d3.axisBottom(timelineScale)
         .ticks(parseInt(endDate)-parseInt(startDate));
 
@@ -52,7 +53,7 @@
 
     var timeX = timelinesvg.append("g")
         .attr("class", "timeaxis")
-        .attr("transform", "translate(0," + 0 + ")")
+        .attr("transform", "translate(0," + 20 + ")")
         .call(timelineAxis);
            
     function timelineZoomFunc() {
