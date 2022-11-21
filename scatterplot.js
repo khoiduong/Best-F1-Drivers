@@ -64,6 +64,8 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     // 0 to max ecc of data
     yScale.domain([0, d3.max(data, function (d) { return d.driverstanding})]);
     
+    yAxis.ticks(d3.max(data, function (d) { return d.driverstanding}));
+    
     //x axis
     var gX = svg.append("g")
         .attr("class", "x axis")
