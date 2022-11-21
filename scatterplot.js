@@ -67,15 +67,6 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     yAxis.ticks(d3.max(data, function (d) { return d.driverstanding}));
     
     //x axis
-    var gX = svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
-    
-    //y axis
-    var gY = svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis);
     
     //Draw Scatterplot
     //Scale Changes as we Zoom
@@ -96,13 +87,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     var shifting = svg.append("g")
         .classed("circles", true);
     
-    function zoomFunction() {
-        gX.call(xAxis.scale(d3.event.transform.rescaleX(xScale)));
-        gY.call(yAxis.scale(d3.event.transform.rescaleY(yScale)));
-        shifting.selectAll("circle")
-            .attr('cx', function(d) {return d3.event.transform.rescaleX(xScale)(d.bestlaptime)})
-            .attr('cy', function(d) {return d3.event.transform.rescaleY(yScale)(d.driverstanding)})
-    }
+
     
     // edited version of the js file given to us
     var newShift = shifting.selectAll("circle")
@@ -159,7 +144,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .attr("y", height-15)
         .style("fill", "green") 
         .attr("font-size", "16px")
-        .text("Total Driver Points"); 
+        .text("Total Driver Points This Year"); 
 
     svg.append("circle")
         .attr("cx", width-40)
@@ -196,6 +181,24 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .attr("x", width-205)
         .attr("y", height-90)
         .text(" 400 Points");
+    
+    //x axis
+    var gX = svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+    
+    //y axis
+    var gY = svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+    
+    function zoomFunction() {
+        gX.call(xAxis.scale(d3.event.transform.rescaleX(xScale)));
+        gY.call(yAxis.scale(d3.event.transform.rescaleY(yScale)));
+        shifting.selectAll("circle")
+            .attr("transform", (d3.event.transform));
+    }
     
     // call zoom on svg members of shifting
     shifting.call(zoom);
