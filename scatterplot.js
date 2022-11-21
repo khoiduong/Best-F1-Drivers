@@ -212,7 +212,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .attr("x", width/2)
         .style("text-anchor", "middle")
         .attr("font-size", "12px")
-        .text("Lap Time (Seconds)");
+        .text("Best Lap Time (Seconds)");
 
     svg.append("g")
         .append("text")
