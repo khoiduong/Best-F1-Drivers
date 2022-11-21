@@ -1,6 +1,6 @@
 driverid,drivername,bestlaptime,yearbestlaptime,driverstanding,driverpoints,laptime2022,laptime2021,laptime2020,laptime2019,teamid,teamstanding
 1,Max Verstappen,120,2021,2,250,125,120,140,130,2,2 
-2,Sergio Perez,140,2022,4,200,140,141,143,150,2,2
-3,Charles Leclerc,125,2022,3,240,125,130,128,200,3,3
-4,George Russell,150,2022,5,100,150,150,155,215,1,1
+2,Sergio Perez,140,2022,4,100,140,141,143,150,2,2
+3,Charles Leclerc,125,2022,3,150,125,130,128,200,3,3
+4,George Russell,150,2022,5,10,150,150,155,215,1,1
 5,Lewis Hamilton,110,2022,1,400,110,120,130,145,1,1
