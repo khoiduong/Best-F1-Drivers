@@ -52,8 +52,8 @@
 d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     let color_domain = []
     for(let i = 0; i < data.length; i++){
-        if(!color_domain.includes(data[i]['teamname'])){
-            color_domain.push(data[i]['teamname']);
+        if(!color_domain.includes(data[i]['teamid'])){
+            color_domain.push(data[i]['teamid']);
         }
     }
     colors.domain(color_domain);
@@ -118,11 +118,11 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .attr("r", function(d) {return 10*Math.sqrt((d.driverpoints/5)/Math.PI);})
         .attr("cx", function(d) {return xScale(d.bestlaptime);})
         .attr("cy", function(d) {return yScale(d.driverstanding);})
-        .style("fill", function (d) { return colors(d.teamname); })
+        .style("fill", function (d) { return colors(d.teamid); })
         .on("mouseover", function (d) {
           tooltip
-            .style("left", d3.event.pageX - 50 + "px")
-            .style("top", d3.event.pageY - 70 + "px")
+            .style("left", d3.event.pageX + "px")
+            .style("top", d3.event.pageY - 55 + "px")
             .style("display", "inline-block")
             .html('Driver: ' + d.drivername + '<br/>' + 'Team: ' + d.teamname);
       })
@@ -130,8 +130,8 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
       // Makes the tooltip follow the mouse when it is moved
       .on('mousemove', function(d) {
           tooltip
-            .style("top", (d3.event.pageY)+"px")
-            .style("left",(d3.event.pageX-28)+"px")
+            .style("top", d3.event.pageY - 55 + "px")
+            .style("left", d3.event.pageX + "px")
 
       })
     
