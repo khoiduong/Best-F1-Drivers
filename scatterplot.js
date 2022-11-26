@@ -258,3 +258,19 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .attr("font-size", "12px")
         .text("Driver Standing (Track Position)");   
 })
+
+function toggleDarkMode() {
+    var background = document.body.style.backgroundColor;
+    if (background != "black") {
+        document.body.style.backgroundColor = "black";
+        svg.selectAll("g").attr("color", "white");
+        svg.selectAll("text").attr('fill', 'white');
+        xAxis.style('fill', 'white');
+    }
+    else {
+        document.body.style.backgroundColor = "white";
+        svg.selectAll("g").attr("color", "black");
+        svg.selectAll("text").attr('fill', 'black');
+
+    }
+}
