@@ -262,7 +262,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
 
 function toggleDarkMode() {
     var background = document.body.style.backgroundColor;
-    if (background != "black") {
+    if (background == "white") {
         document.body.style.backgroundColor = "#0D1430";
         document.getElementById("endinfo").style.backgroundColor="#5A5A5A";
         
