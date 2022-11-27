@@ -1,69 +1,88 @@
-    let main_body_width = parseInt(d3.select("body").style("width"));
-    console.log(main_body_width)
-    //Define Margin
-    var margin = {left: 80, right: 80, top: 50, bottom: 50 }, 
-        width = (2 * main_body_width / 3) - margin.left -margin.right,
-        height = 600 - margin.top - margin.bottom;
+let main_body_width = parseInt(d3.select("body").style("width"));
+console.log(main_body_width)
+//Define Margin
+var margin = {left: 80, right: 80, top: 50, bottom: 50 }, 
+    width = (2 * main_body_width / 3) - margin.left -margin.right,
+    height = 600 - margin.top - margin.bottom;
 
-    //Define Color
-    // Schemecategory20 got removed in v4
-    var colors = d3.scaleOrdinal(d3.schemeCategory10);
+//Define Color
+// Schemecategory20 got removed in v4
+var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-    //Define SVG
-    var svg = d3.select("body")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+//Define SVG
+var svg = d3.select("body")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    //Define Scales   
-    var xScale = d3.scaleLinear()
-        .range([0, width]);
+//Define Scales   
+var xScale = d3.scaleLinear()
+    .range([0, width]);
 
-    var yScale = d3.scaleLinear()
-        .range([height, 0]);
+var yScale = d3.scaleLinear()
+    .range([height, 0]);
 
-    var startDate = "1990-01-01";
-    var endDate = "2010-01-01";
+var startDate = "1990-01-01";
+var endDate = "2010-01-01";
 
-    var timelineScale = d3.scaleTime()
-        .domain([new Date(startDate), new Date(endDate)])
-        .range([margin.left, width+margin.left])
-        .nice();
-    
-    //Define Tooltip here
-    var tooltip = d3.select("body")
-        .append("div")	
-        .attr("class", "tooltip")
-      
-       //Define Axis
-    var xAxis = d3.axisBottom(xScale).tickPadding(2);
-    var yAxis = d3.axisLeft(yScale).tickPadding(2);
+var timelineScale = d3.scaleTime()
+    .domain([new Date(startDate), new Date(endDate)])
+    .range([margin.left, width+margin.left])
+    .nice();
 
-    //TODO: Scale up the size of timeline axis ticks and labels to make them stand out more
-    var timelineAxis = d3.axisBottom(timelineScale)
-        .ticks(parseInt(endDate)-parseInt(startDate));
+//Define Tooltip here
+var tooltip = d3.select("body")
+    .append("div")	
+    .attr("class", "tooltip")
 
-    var timelineHeight = 100;
-    var timelinesvg = d3.select("body")
-        .append("svg")
-        .attr("width", main_body_width)
-        .attr("height", timelineHeight);
+   //Define Axis
+var xAxis = d3.axisBottom(xScale).tickPadding(2);
+var yAxis = d3.axisLeft(yScale).tickPadding(2);
 
-    var timeX = timelinesvg.append("g")
-        .attr("class", "timeaxis")
-        .attr("transform", "translate(0," + 20 + ")")
-        .call(timelineAxis);
-           
-    function timelineZoomFunc() {
-        timeX.call(timelineAxis.scale(d3.event.transform.rescaleX(timelineScale)));
+//TODO: Scale up the size of timeline axis ticks and labels to make them stand out more
+var timelineAxis = d3.axisBottom(timelineScale)
+    .ticks(parseInt(endDate)-parseInt(startDate));
+
+var timelineHeight = 100;
+var timelinesvg = d3.select("body")
+    .append("svg")
+    .attr("width", main_body_width)
+    .attr("height", timelineHeight);
+
+var timeX = timelinesvg.append("g")
+    .attr("class", "timeaxis")
+    .attr("transform", "translate(0," + 20 + ")")
+    .call(timelineAxis);
+
+function timelineZoomFunc() {
+    timeX.call(timelineAxis.scale(d3.event.transform.rescaleX(timelineScale)));
+}
+
+var timelinezoom = d3.zoom()
+    .translateExtent([[0,0],[new Date(startDate), new Date(endDate)]])
+    .scaleExtent([1,1])
+    .on('zoom', timelineZoomFunc);
+
+function driverConverter(data) {
+    return {
+        driverId: +data.driverId,
+        driverSurname: data.surname,
+        driverFirstname: data.forename
     }
+}
 
-    var timelinezoom = d3.zoom()
-        .translateExtent([[0,0],[new Date(startDate), new Date(endDate)]])
-        .scaleExtent([1,1])
-        .on('zoom', timelineZoomFunc);
+var drivers = []
+d3.csv("data/drivers.csv", driverConverter).then(function (data) {
+    for (var i = 0; i < data.length; i++) {
+        drivers.push({"driverId": data[i].driverId, "driverName": (data[i].driverFirstname + " " + data[i].driverSurname)});
+//        console.log(data[i].driverId);
+//        console.log(data[i].driverSurname);
+    }
+});
+
+console.log(drivers);
 
 // driverid,drivername,bestlaptime,yearbestlaptime,driverstanding,laptime2022,laptime2021,laptime2020,laptime2019
     //Get Data
