@@ -169,7 +169,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .style("stroke-size", "1px");
 
     svg.append("text")
-        .attr("class", "label")
+        .attr("class", "legend")
         .attr("x", width-205)
         .attr("y", height-15)
         .style("fill", "green") 
@@ -183,7 +183,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .style("fill", "white");
 
     svg.append("text")
-        .attr("class", "label")
+        .attr("class", "legend")
         .attr("x", width-205)
         .attr("y", height-230)
         .text(" 10 points");
@@ -195,7 +195,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .style("fill", "white");
 
     svg.append("text")
-        .attr("class", "label")
+        .attr("class", "legend")
         .attr("x", width-205)
         .attr("y", height-190)
         .text(" 100 points");
@@ -207,20 +207,20 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .style("fill", "white");
 
     svg.append("text")
-        .attr("class", "label")
+        .attr("class", "legend")
         .attr("x", width-205)
         .attr("y", height-90)
         .text(" 400 Points");
     
     //x axis
     var gX = svg.append("g")
-        .attr("class", "x axis")
+        .attr("class", "x_axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
     
     //y axis
     var gY = svg.append("g")
-        .attr("class", "y axis")
+        .attr("class", "y_axis")
         .call(yAxis);
     
     function zoomFunction() {
@@ -264,13 +264,12 @@ function toggleDarkMode() {
     if (background != "black") {
         document.body.style.backgroundColor = "black";
         svg.selectAll("g").attr("color", "white");
-        svg.selectAll("text").attr('fill', 'white');
-        xAxis.style('fill', 'white');
+        svg.selectAll(".label ").attr('fill', 'white');
     }
     else {
         document.body.style.backgroundColor = "white";
         svg.selectAll("g").attr("color", "black");
-        svg.selectAll("text").attr('fill', 'black');
+        svg.selectAll(".label ").attr('fill', 'black');
 
     }
 }
