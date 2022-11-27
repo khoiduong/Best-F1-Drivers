@@ -33,7 +33,7 @@ h1 {
   color: #d62728;
 }
 
-.endinfo {
+#endinfo {
   background-color: lightgrey;
   padding: 1rem;
 }
@@ -54,7 +54,7 @@ h1 {
 
 .names {
   text-align: center;
-  color: blue;
+  color: darkblue;
   font-size: 0.9rem;
 }
 

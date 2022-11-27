@@ -161,6 +161,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     
     // Adds legend as seperate shapes with respective sized cirles and different text
     svg.append("rect")
+        .attr("class", "rectLegend")
         .attr("x", width-220)
         .attr("y", height-260)
         .attr("width", 260)
@@ -169,7 +170,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .style("stroke-size", "1px");
 
     svg.append("text")
-        .attr("class", "legend")
+        .attr("class", "legendTitle")
         .attr("x", width-205)
         .attr("y", height-15)
         .style("fill", "green") 
@@ -262,14 +263,27 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
 function toggleDarkMode() {
     var background = document.body.style.backgroundColor;
     if (background != "black") {
-        document.body.style.backgroundColor = "black";
+        document.body.style.backgroundColor = "#0D1430";
+        document.getElementById("endinfo").style.backgroundColor="#5A5A5A";
+        
         svg.selectAll("g").attr("color", "white");
-        svg.selectAll(".label ").attr('fill', 'white');
+        svg.selectAll(".label").attr('fill', 'white');
+        svg.selectAll(".legend").attr('fill', 'white');
+        svg.selectAll(".legendTitle").style('fill', 'lime');
+        svg.selectAll(".rectLegend").attr('fill', '#5A5A5A');
+        
+        timelinesvg.selectAll(".timeaxis").attr('color', 'white');
     }
     else {
         document.body.style.backgroundColor = "white";
+        document.getElementById("endinfo").style.backgroundColor="lightgrey";
+        
         svg.selectAll("g").attr("color", "black");
-        svg.selectAll(".label ").attr('fill', 'black');
-
+        svg.selectAll(".label").attr('fill', 'black');
+        svg.selectAll(".legend").attr('fill', 'black');
+        svg.selectAll(".legendTitle").style('fill', 'green');
+        svg.selectAll(".rectLegend").attr('fill', 'lightgrey');
+        
+        timelinesvg.selectAll(".timeaxis").attr('color', 'black');
     }
 }
