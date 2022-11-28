@@ -73,16 +73,31 @@ function driverConverter(data) {
     }
 }
 
+function raceConverter(data) {
+    return {
+        raceId: +data.raceId,
+        year: +data.year
+    }
+}
+
 var drivers = []
 d3.csv("data/drivers.csv", driverConverter).then(function (data) {
     for (var i = 0; i < data.length; i++) {
         drivers.push({"driverId": data[i].driverId, "driverName": (data[i].driverFirstname + " " + data[i].driverSurname)});
-//        console.log(data[i].driverId);
-//        console.log(data[i].driverSurname);
+
+    }
+});
+
+var races = []
+d3.csv("data/races.csv", raceConverter).then(function (data) {
+    for (var i = 0; i < data.length; i++) {
+        races.push({"raceId": data[i].raceId, "year": data[i].year});
+
     }
 });
 
 console.log(drivers);
+console.log(races);
 
 // driverid,drivername,bestlaptime,yearbestlaptime,driverstanding,laptime2022,laptime2021,laptime2020,laptime2019
     //Get Data
@@ -143,12 +158,13 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     // edited version of the js file given to us
     var newShift = shifting.selectAll("circle")
         .data(data);
-
+    
     // Adds all data to scatterplot, along with tooltip mouseover, mousemove and mouseout
     // Also added in the html and css portions to make the table on mouseover
     // Works with double click or ctrl click for zoom in or out
     // Sliding orks with mouse click and drag
     // Zoom also works with trackpad/mouse scroller
+
     newShift = newShift.enter().append("circle")
         .attr("class", "dot")
         .attr("r", function(d) {return 10*Math.sqrt((d.driverpoints/5)/Math.PI);})
@@ -156,11 +172,17 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .attr("cy", function(d) {return yScale(d.driverstanding);})
         .style("fill", function (d) { return colors(d.teamid); })
         .on("mouseover", function (d) {
+        var getDriverName;
+        for (let i = 0; i < drivers.length; i++) {
+            if (drivers[i]["driverId"] == d.driverid) {
+                getDriverName = new String(drivers[i]["driverName"]);
+            }
+        }
           tooltip
             .style("left", d3.event.pageX + "px")
             .style("top", d3.event.pageY - 55 + "px")
             .style("display", "inline-block")
-            .html('Driver: ' + drivers[d.driverid - 1]["driverName"] + '<br/>' + 'Team: ' + d.teamname);
+            .html('Driver: ' + getDriverName + '<br/>' + 'Team: ' + d.teamname);
       })
       
       // Makes the tooltip follow the mouse when it is moved
