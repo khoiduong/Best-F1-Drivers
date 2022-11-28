@@ -160,7 +160,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
             .style("left", d3.event.pageX + "px")
             .style("top", d3.event.pageY - 55 + "px")
             .style("display", "inline-block")
-            .html('Driver: ' + d.drivername + '<br/>' + 'Team: ' + d.teamname);
+            .html('Driver: ' + drivers[d.driverid - 1]["driverName"] + '<br/>' + 'Team: ' + d.teamname);
       })
       
       // Makes the tooltip follow the mouse when it is moved

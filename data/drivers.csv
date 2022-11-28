@@ -840,6 +840,7 @@ driverId,driverRef,number,code,forename,surname,dob,nationality,url
 839,"ocon",31,"OCO","Esteban","Ocon","1996-09-17","French","http://en.wikipedia.org/wiki/Esteban_Ocon"
 840,"stroll",18,"STR","Lance","Stroll","1998-10-29","Canadian","http://en.wikipedia.org/wiki/Lance_Stroll"
 841,"giovinazzi",99,"GIO","Antonio","Giovinazzi","1993-12-14","Italian","http://en.wikipedia.org/wiki/Antonio_Giovinazzi"
+842,"undefined",10000,"UND","test","driver","1969-04-20","Soviet","http://en.wikipedia.org/wiki/Antonio_Giovinazzi"
 843,"brendon_hartley",28,"HAR","Brendon","Hartley","1989-11-10","New Zealander","http://en.wikipedia.org/wiki/Brendon_Hartley"
 844,"leclerc",16,"LEC","Charles","Leclerc","1997-10-16","Monegasque","http://en.wikipedia.org/wiki/Charles_Leclerc"
 845,"sirotkin",35,"SIR","Sergey","Sirotkin","1995-08-27","Russian","http://en.wikipedia.org/wiki/Sergey_Sirotkin_(racing_driver)"
