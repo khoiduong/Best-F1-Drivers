@@ -26,6 +26,7 @@ var yScale = d3.scaleLinear()
 
 var startDate = "1990-01-01";
 var endDate = "2010-01-01";
+var currYear = 2022;
 
 var timelineScale = d3.scaleTime()
     .domain([new Date(startDate), new Date(endDate)])
@@ -80,6 +81,22 @@ function raceConverter(data) {
     }
 }
 
+function resultsConverter(data) {
+    return {
+        resRaceId: +data.raceId,
+        resultId: +data.resultId,
+        resDriverId: +data.driverId,
+        resConstructorId: +data.constructorId
+    }
+}
+
+function teamConverter(data) {
+    return {
+        constructorId: +data.constructorId,
+        constructorName: data.name
+    }
+}
+
 var drivers = []
 d3.csv("data/drivers.csv", driverConverter).then(function (data) {
     for (var i = 0; i < data.length; i++) {
@@ -96,15 +113,34 @@ d3.csv("data/races.csv", raceConverter).then(function (data) {
     }
 });
 
+var constructors = []
+d3.csv("data/constructors.csv", teamConverter).then(function (data) {
+    for (var i = 0; i < data.length; i++) {
+        constructors.push({"teamId": data[i].constructorId, "teamName": data[i].constructorName});
+
+    }
+});
+
+d3.csv("data/results.csv", resultsConverter).then(function (data) {
+    for (var j = 0; j < data.length; j++) {
+        for (let i = 0; i < races.length; i++) {
+            if (data[j].resRaceId == races[i]["raceId"] && races[i]["year"] == currYear) {
+                 drivers[data[j].resDriverId - 1].teamId = data[j].resConstructorId;
+            }
+        }
+    }
+});
+
 console.log(drivers);
 console.log(races);
+console.log(constructors);
 
 // driverid,drivername,bestlaptime,yearbestlaptime,driverstanding,laptime2022,laptime2021,laptime2020,laptime2019
     //Get Data
     function rowConverter(data) {
         return {
             driverid : +data.driverid,
-            drivername : data.drivername,
+//            drivername : data.drivername,
             bestlaptime: +data.bestlaptime,
             yearbestlaptime: +data.yearbestlaptime,
             driverstanding: +data.driverstanding,
@@ -120,10 +156,11 @@ console.log(races);
 d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     let color_domain = []
     for(let i = 0; i < data.length; i++){
-        if(!color_domain.includes(data[i]['teamid'])){
-            color_domain.push(data[i]['teamid']);
+        if(!color_domain.includes(data[i]["teamid"])){
+            color_domain.push(data[i]["teamid"]);
         }
     }
+    console.log(color_domain);
     colors.domain(color_domain);
     //console.log(color_domain);
     
@@ -173,16 +210,23 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .style("fill", function (d) { return colors(d.teamid); })
         .on("mouseover", function (d) {
         var getDriverName;
-        for (let i = 0; i < drivers.length; i++) {
-            if (drivers[i]["driverId"] == d.driverid) {
-                getDriverName = new String(drivers[i]["driverName"]);
+        var getTeamId = 0;
+        var getTeamName;
+
+        getDriverName = new String(drivers[d.driverid - 1]["driverName"]);
+        getTeamId = drivers[d.driverid - 1]["teamId"];
+
+        
+        for (let i = 0; i < constructors.length; i++) {
+            if (constructors[i]["teamId"] == getTeamId) {
+                getTeamName = new String(constructors[i]["teamName"]);
             }
         }
           tooltip
             .style("left", d3.event.pageX + "px")
             .style("top", d3.event.pageY - 55 + "px")
             .style("display", "inline-block")
-            .html('Driver: ' + getDriverName + '<br/>' + 'Team: ' + d.teamname);
+            .html('Driver: ' + getDriverName + '<br/>' + 'Team: ' + getTeamName);
       })
       
       // Makes the tooltip follow the mouse when it is moved
