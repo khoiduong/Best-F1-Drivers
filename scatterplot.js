@@ -27,6 +27,7 @@ var yScale = d3.scaleLinear()
 var startDate = "1990-01-01";
 var endDate = "2010-01-01";
 var currYear = 2022;
+var yearSelected = 2022;
 
 var timelineScale = d3.scaleTime()
     .domain([new Date(startDate), new Date(endDate)])
@@ -344,6 +345,24 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
         .attr("font-size", "12px")
         .text("Driver Standing (Track Position)");   
 })
+
+function upYear() {
+    if(yearSelected + 1 < 2022)
+        {yearSelected = yearSelected + 1;}
+}
+function downYear() {
+    if(yearSelected - 1 > 1960)
+        {yearSelected = yearSelected - 1;}
+}
+function up5Year() {
+    if(yearSelected + 5 < 2022)
+        {yearSelected = yearSelected + 5;}
+}
+function down5Year() {
+    if(yearSelected - 5 > 1960)
+        {yearSelected = yearSelected - 5;}
+}
+
 
 function toggleDarkMode() {
     var background = document.body.style.backgroundColor;
