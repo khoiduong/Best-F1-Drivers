@@ -26,7 +26,6 @@ var yScale = d3.scaleLinear()
 
 var startDate = "1990-01-01";
 var endDate = "2010-01-01";
-var currYear = 2022;
 var yearSelected = 2022;
 
 var timelineScale = d3.scaleTime()
@@ -125,7 +124,7 @@ d3.csv("data/constructors.csv", teamConverter).then(function (data) {
 d3.csv("data/results.csv", resultsConverter).then(function (data) {
     for (var j = 0; j < data.length; j++) {
         for (let i = 0; i < races.length; i++) {
-            if (data[j].resRaceId == races[i]["raceId"] && races[i]["year"] == currYear) {
+            if (data[j].resRaceId == races[i]["raceId"] && races[i]["year"] == yearSelected) {
                  drivers[data[j].resDriverId - 1].teamId = data[j].resConstructorId;
             }
         }
@@ -242,6 +241,17 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
       .on("mouseout", function (d) {
         tooltip.style("display", "none");
       });
+    
+    var cName = svg.selectAll(".text")
+        .data(data)
+        .enter()
+        .append("text")
+        .attr("class","label")
+        .style("text-anchor", "start")
+        .attr("x", function(d) {return xScale(d.bestlaptime);})
+        .attr("y", function(d) {return yScale(d.driverstanding - 0.05);})
+        .attr("fill", "black")
+        .text(function (d) {return drivers[d.driverid-1]["driverName"]; });
         
     
     
