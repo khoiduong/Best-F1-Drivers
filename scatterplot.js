@@ -323,6 +323,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     function zoomFunction() {
         gX.call(xAxis.scale(d3.event.transform.rescaleX(xScale)));
         gY.call(yAxis.scale(d3.event.transform.rescaleY(yScale)));
+        cName.attr("transform", (d3.event.transform));
         shifting.selectAll("circle")
             .attr("transform", (d3.event.transform));
     }
