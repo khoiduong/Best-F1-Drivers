@@ -165,7 +165,7 @@ d3.csv("data/test.csv", rowConverter).then(function (data) {
     //console.log(color_domain);
     
     // 0 to max gdp of data
-    xScale.domain([d3.min(data, function (d) { return d.bestlaptime}) - 5, d3.max(data, function (d) { return d.bestlaptime}) + 5]);
+    xScale.domain([d3.min(data, function (d) { return d.bestlaptime}) - 5, 80 + 5]);
     // 0 to max ecc of data
     yScale.domain([1, d3.max(data, function (d) { return d.driverstanding})]);
     
@@ -214,7 +214,7 @@ d3.csv("data/test.csv", rowConverter).then(function (data) {
         var getTeamName;
 
         getDriverName = new String(drivers[d.driverid - 1]["driverName"]);
-        getTeamId = drivers[d.driverid - 1]["teamId"];
+        getTeamId = d.teamid;
 
         
         for (let i = 0; i < constructors.length; i++) {
