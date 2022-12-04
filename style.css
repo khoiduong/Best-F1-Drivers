@@ -66,29 +66,28 @@ h1 {
 }
 
 .axis--x path {
-    display: none;
+  display: none;
 }
 
 .line {
-    fill: none,
-    stroke: steelblue;
-    stroke-width: 1.5px;
+  fill: none;
+  /* stroke: steelblue; */
+  stroke-width: 1.5px;
 }
 
 .axis text {
-    font: Times;
-    font-size: 12px;
-    font-weight: bold;
-    shape-rendering: crispEdges;
+  font: Times;
+  font-size: 12px;
+  font-weight: bold;
+  shape-rendering: crispEdges;
 }
 
 .grid {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .svg2 {
-  position: absolute; 
-  top: 100px; 
-  left: 750px; 
+  position: absolute;
+  top: 100px;
+  left: 790px;
 }
-    
