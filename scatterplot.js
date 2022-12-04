@@ -1,9 +1,9 @@
-let main_body_width = parseInt(d3.select("body").style("width"));
+var main_body_width = parseInt(d3.select("body").style("width"));
 console.log(main_body_width);
 //Define Margin
-var margin = { left: 80, right: 80, top: 50, bottom: 50 },
-  width = (4 * main_body_width) / 5 - margin.left - margin.right,
-  height = 700 - margin.top - margin.bottom;
+var margin = { left: 80, right: 10, top: 50, bottom: 50 },
+  width = (2 * main_body_width) / 3 - margin.left - margin.right - 100,
+  height = 600 - margin.top - margin.bottom;
 
 //Define Color
 // Schemecategory20 got removed in v4
@@ -14,63 +14,58 @@ var svg1 = d3
   .select(".svg1")
   .append("svg")
   //.attr("width", width + margin.left + margin.right)
-  .attr("width", "50%")
+  .attr("width", "67%")
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-//Define Scales
-var xScale = d3.scaleLinear().range([0, width]);
 
-var yScale = d3.scaleLinear().range([height, 0]);
 
 var startDate = "1990-01-01";
 var endDate = "2010-01-01";
 var yearSelected = 2022;
 
-var timelineScale = d3
-  .scaleTime()
-  .domain([new Date(startDate), new Date(endDate)])
-  .range([margin.left, width + margin.left])
-  .nice();
+//var timelineScale = d3
+//  .scaleTime()
+//  .domain([new Date(startDate), new Date(endDate)])
+//  .range([margin.left, width + margin.left])
+//  .nice();
 
 //Define Tooltip here
 var tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
-//Define Axis
-var xAxis = d3.axisBottom(xScale).tickPadding(2);
-var yAxis = d3.axisLeft(yScale).tickPadding(2);
+
 
 //TODO: Scale up the size of timeline axis ticks and labels to make them stand out more
-var timelineAxis = d3
-  .axisBottom(timelineScale)
-  .ticks(parseInt(endDate) - parseInt(startDate));
-
-var timelineHeight = 100;
-var timelinesvg = d3
-  .select("body")
-  .append("svg")
-  .attr("width", main_body_width)
-  .attr("height", timelineHeight);
-
-var timeX = timelinesvg
-  .append("g")
-  .attr("class", "timeaxis")
-  .attr("transform", "translate(0," + 20 + ")")
-  .call(timelineAxis);
-
-function timelineZoomFunc() {
-  timeX.call(timelineAxis.scale(d3.event.transform.rescaleX(timelineScale)));
-}
-
-var timelinezoom = d3
-  .zoom()
-  .translateExtent([
-    [0, 0],
-    [new Date(startDate), new Date(endDate)],
-  ])
-  .scaleExtent([1, 1])
-  .on("zoom", timelineZoomFunc);
+//var timelineAxis = d3
+//  .axisBottom(timelineScale)
+//  .ticks(parseInt(endDate) - parseInt(startDate));
+//
+//var timelineHeight = 100;
+//var timelinesvg = d3
+//  .select("body")
+//  .append("svg")
+//  .attr("width", main_body_width)
+//  .attr("height", timelineHeight);
+//
+//var timeX = timelinesvg
+//  .append("g")
+//  .attr("class", "timeaxis")
+//  .attr("transform", "translate(0," + 20 + ")")
+//  .call(timelineAxis);
+//
+//function timelineZoomFunc() {
+//  timeX.call(timelineAxis.scale(d3.event.transform.rescaleX(timelineScale)));
+//}
+//
+//var timelinezoom = d3
+//  .zoom()
+//  .translateExtent([
+//    [0, 0],
+//    [new Date(startDate), new Date(endDate)],
+//  ])
+//  .scaleExtent([1, 1])
+//  .on("zoom", timelineZoomFunc);
 
 function driverConverter(data) {
   return {
@@ -132,7 +127,7 @@ d3.csv("data/constructors.csv", teamConverter).then(function (data) {
 
 d3.csv("data/results.csv", resultsConverter).then(function (data) {
   for (var j = 0; j < data.length; j++) {
-    for (let i = 0; i < races.length; i++) {
+    for (var i = 0; i < races.length; i++) {
       if (
         data[j].resRaceId == races[i]["raceId"] &&
         races[i]["year"] == yearSelected
@@ -151,6 +146,16 @@ console.log(constructors);
 //Get Data
 
 function drawPlot() {
+    
+//Define Scales
+var xScale = d3.scaleLinear().range([0, width]);
+
+var yScale = d3.scaleLinear().range([height, 0]);
+
+//Define Axis
+var xAxis = d3.axisBottom(xScale).tickPadding(2);
+var yAxis = d3.axisLeft(yScale).tickPadding(2);
+    
   function rowConverter(data) {
     var s = +data.driverStanding2022;
     var p = +data.driverPoints2022;
@@ -389,7 +394,7 @@ function drawPlot() {
       shifting.selectAll("circle").attr("transform", d3.event.transform);
     }
 
-    timelinesvg.call(timelinezoom);
+//    timelinesvg.call(timelinezoom);
 
     // call zoom on svg members of shifting
     shifting.call(zoom);

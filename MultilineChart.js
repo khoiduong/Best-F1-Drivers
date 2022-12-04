@@ -11,21 +11,21 @@
 //    .append("g")
 //    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var margin = { top: 10, right: 90, bottom: 150, left: 50 },
-  width = 760 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+var margin = { top: 10, right: 90, bottom: 150, left: 0 },
+  chart_width = 550 - margin.left - margin.right,
+  chart_height = 500 - margin.top - margin.bottom;
 
 var svg = d3
   .select(".svg2")
   .append("svg")
   //.attr("width", width + margin.left + margin.right)
   .attr("width", "800")
-  .attr("height", height + margin.top + margin.bottom)
+  .attr("height", chart_height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var xScale = d3.scaleLinear().range([0, width]);
-var yScale = d3.scaleLinear().range([height, 0]);
+var xScale = d3.scaleLinear().range([0, chart_width]);
+var yScale = d3.scaleLinear().range([chart_height, 0]);
 var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
 var xAxis = d3.axisBottom(xScale);
@@ -172,7 +172,7 @@ d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
       .attr("class", "countryLabel")
       .text(data[x]["Country Name"])
       .attr("y", yScale(data[x]["years"][endYear - startYear][1]))
-      .attr("x", width + 10)
+      .attr("x", chart_width + 10)
       .attr("font-size", "14px");
     // .style("opacity")
   }
@@ -181,14 +181,14 @@ d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
   svg
     .append("g")
     .attr("class", "axis axis--x")
-    .attr("transform", "translate(0," + height + ")")
+    .attr("transform", "translate(0," + chart_height + ")")
     .call(xAxis);
 
   // Draw yAxis and position the label
   svg
     .append("g")
     .attr("class", "axis axis--y")
-    .attr("transform", "translate(" + width + ",0")
+    .attr("transform", "translate(" + chart_width + ",0")
     .call(yAxis);
 
   // This function creates the y-axis label, and positions it near the y-axis with respect to the margins,
@@ -197,7 +197,7 @@ d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
     .append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.leftx)
-    .attr("x", 0 - height / 2)
+    .attr("x", 0 - chart_height / 2)
     .attr("dy", "-2.8em")
     .style("text-anchor", "middle")
     .text("Millions of BTUs Per Person")
@@ -207,7 +207,7 @@ d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
   svg
     .append("text")
     .attr("y", 0 - margin.leftx)
-    .attr("x", width)
+    .attr("x", chart_width)
     .attr("dy", "-2.8em")
     .text("Year")
     .attr("font-size", "14px");
