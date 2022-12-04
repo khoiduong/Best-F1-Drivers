@@ -2,8 +2,8 @@ let main_body_width = parseInt(d3.select("body").style("width"));
 console.log(main_body_width);
 //Define Margin
 var margin = { left: 80, right: 80, top: 50, bottom: 50 },
-  width = (2 * main_body_width) / 3 - margin.left - margin.right,
-  height = 600 - margin.top - margin.bottom;
+  width = (4 * main_body_width) / 5 - margin.left - margin.right,
+  height = 700 - margin.top - margin.bottom;
 
 //Define Color
 // Schemecategory20 got removed in v4
@@ -14,7 +14,7 @@ var svg1 = d3
   .select(".svg1")
   .append("svg")
   //.attr("width", width + margin.left + margin.right)
-  .attr("width", "40%")
+  .attr("width", "50%")
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -152,26 +152,32 @@ console.log(constructors);
 
 function drawPlot() {
   function rowConverter(data) {
-    var s = 0;
-    var p = 0;
-    var t = 0;
-    if (yearSelected == 2022) {
-      s = +data.driverStanding2022;
-      p = +data.driverPoints2022;
-    } else {
+    var s = +data.driverStanding2022;
+    var p = +data.driverPoints2022;
+    var t = +data.constructorId2022;
+      
+    if (yearSelected == 2021) {
       s = +data.driverStanding2021;
       p = +data.driverPoints2021;
+      t = +data.constructorId2021;
     }
+    else if (yearSelected == 2020) {
+      s = +data.driverStanding2020;
+      p = +data.driverPoints2020;
+      t = +data.constructorId2020;
+    }
+
     return {
       driverid: +data.driverId,
       drivername: data.driverName,
       bestlaptime: +data.bestLapTime,
+      avglaptime: +data.avgLap2022,
       yearbestlaptime: +data.yearbestlaptime,
       driverstanding: s,
       driverpoints: p,
       laptime2022: +data.laptime2022,
       laptime2021: +data.laptime2021,
-      teamid: +data.constructorId2022,
+      teamid: t,
       teamstanding: +data.teamstanding,
       teamname: data.constructorName,
     };
@@ -188,25 +194,11 @@ function drawPlot() {
     //console.log(color_domain);
 
     // 0 to max gdp of data
-    xScale.domain([
-      d3.min(data, function (d) {
-        return d.bestlaptime;
-      }) - 2,
-      70,
-    ]);
+    xScale.domain([85, 90]);
     // 0 to max ecc of data
-    yScale.domain([
-      1,
-      d3.max(data, function (d) {
-        return d.driverstanding;
-      }),
-    ]);
+    yScale.domain([1, 15]);
 
-    yAxis.ticks(
-      d3.max(data, function (d) {
-        return d.driverstanding;
-      })
-    );
+    yAxis.ticks(15);
 
     //x axis
 
@@ -250,7 +242,7 @@ function drawPlot() {
         return 10 * Math.sqrt(d.driverpoints / 5 / Math.PI);
       })
       .attr("cx", function (d) {
-        return xScale(d.bestlaptime);
+        return xScale(d.avglaptime);
       })
       .attr("cy", function (d) {
         return yScale(d.driverstanding);
@@ -307,7 +299,7 @@ function drawPlot() {
       .attr("class", "label")
       .style("text-anchor", "start")
       .attr("x", function (d) {
-        return xScale(d.bestlaptime);
+        return xScale(d.avglaptime);
       })
       .attr("y", function (d) {
         return yScale(d.driverstanding - 0.05);
@@ -332,11 +324,11 @@ function drawPlot() {
     svg1
       .append("text")
       .attr("class", "legendTitle")
-      .attr("x", width - 205)
+      .attr("x", width - 90)
       .attr("y", height - 15)
       .style("fill", "green")
       .attr("font-size", "16px")
-      .text("Total Driver Points This Year");
+      .text("Annual Points");
 
     svg1
       .append("circle")
@@ -348,8 +340,8 @@ function drawPlot() {
     svg1
       .append("text")
       .attr("class", "legend")
-      .attr("x", width - 205)
-      .attr("y", height - 230)
+      .attr("x", width - 70)
+      .attr("y", height - 240)
       .text(" 10 points");
 
     svg1
@@ -362,23 +354,23 @@ function drawPlot() {
     svg1
       .append("text")
       .attr("class", "legend")
-      .attr("x", width - 205)
-      .attr("y", height - 190)
+      .attr("x", width - 73)
+      .attr("y", height - 185)
       .text(" 100 points");
 
     svg1
       .append("circle")
       .attr("cx", width - 40)
-      .attr("cy", height - 90)
+      .attr("cy", height - 105)
       .attr("r", 10 * Math.sqrt(400 / 5 / Math.PI))
       .style("fill", "white");
 
     svg1
       .append("text")
       .attr("class", "legend")
-      .attr("x", width - 205)
-      .attr("y", height - 90)
-      .text(" 400 Points");
+      .attr("x", width - 70)
+      .attr("y", height - 100)
+      .text(" 400 points");
 
     //x axis
     var gX = svg1

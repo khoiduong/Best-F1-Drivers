@@ -75,7 +75,7 @@ h1 {
     stroke-width: 1.5px;
 }
 
-.axis text {
+.axis text9{
     font: Times;
     font-size: 12px;
     font-weight: bold;
@@ -89,6 +89,6 @@ h1 {
 .svg2 {
   position: absolute; 
   top: 100px; 
-  left: 750px; 
+  left: 900px; 
 }
     
