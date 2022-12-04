@@ -263,6 +263,7 @@ d3.csv("data/test.csv", rowConverter).then(function (data) {
         .attr("width", 260)
         .attr("height", 255)
         .attr("fill", "lightgrey")
+        .style("opacity", 0.9)
         .style("stroke-size", "1px");
 
     svg.append("text")
