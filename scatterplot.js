@@ -139,21 +139,26 @@ console.log(constructors);
     //Get Data
     function rowConverter(data) {
         return {
-            driverid : +data.driverid,
-//            drivername : data.drivername,
-            bestlaptime: +data.bestlaptime,
+            driverid : +data.driverId,
+            drivername : data.driverName,
+            bestlaptime: +data.bestLapTime,
             yearbestlaptime: +data.yearbestlaptime,
-            driverstanding: +data.driverstanding,
-            driverpoints: +data.driverpoints,
+            driverstanding: +data.driverStanding2022,
+            driverpoints: +data.driverPoints2022,
             laptime2022: +data.laptime2022,
             laptime2021: +data.laptime2021,
-            teamid: +data.teamid,
+            teamid: +data.constructorId2022,
             teamstanding: +data.teamstanding,
-            teamname: data.teamname
+            teamname: data.constructorName
         }
     }
-
-d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
+var counter = 0;
+d3.csv("data/test.csv", rowConverter).then(function (data) {
+    counter++;
+    console.log(data[counter]);
+    if (data[counter]["driverstanding"] == 0) {
+        return;
+    }
     let color_domain = []
     for(let i = 0; i < data.length; i++){
         if(!color_domain.includes(data[i]["teamid"])){
@@ -167,7 +172,7 @@ d3.csv("data/sampleData.csv", rowConverter).then(function (data) {
     // 0 to max gdp of data
     xScale.domain([d3.min(data, function (d) { return d.bestlaptime}) - 5, d3.max(data, function (d) { return d.bestlaptime}) + 5]);
     // 0 to max ecc of data
-    yScale.domain([0, d3.max(data, function (d) { return d.driverstanding})]);
+    yScale.domain([1, d3.max(data, function (d) { return d.driverstanding})]);
     
     yAxis.ticks(d3.max(data, function (d) { return d.driverstanding}));
     
