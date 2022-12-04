@@ -366,14 +366,14 @@ d3.csv("data/test.csv", rowConverter).then(function (data) {
 drawPlot();
 
 function upYear() {
-    if(yearSelected + 1 < 2022)
+    if(yearSelected + 1 < 2023)
         {yearSelected = yearSelected + 1;}
     document.getElementById('yearSelected').innerText = yearSelected;
     svg.selectAll('*').remove();
     drawPlot();
 }
 function downYear() {
-    if(yearSelected - 1 > 1960)
+    if(yearSelected - 1 > 1995)
         {yearSelected = yearSelected - 1;}
     document.getElementById('yearSelected').innerText = yearSelected;
     svg.selectAll('*').remove();
@@ -387,7 +387,7 @@ function up5Year() {
     drawPlot();
 }
 function down5Year() {
-    if(yearSelected - 5 > 1960)
+    if(yearSelected - 5 > 1995)
         {yearSelected = yearSelected - 5;}
     document.getElementById('yearSelected').innerText = yearSelected;
     svg.selectAll('*').remove();
