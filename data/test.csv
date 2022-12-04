@@ -116,8 +116,8 @@ driverId,driverName,driverStandingOverall,driverStandingYearSpecific,driverStand
 115,Rio Haryanto,112,4,,2016,70.342,Manor Marussia,,1,,
 116,Stoffel Vandoorne,108,3,,2017,68.422,McLaren,,279,,
 117,Esteban Ocon,109,10,8,2020,57.35,Manor Marussia,214,3025,74,92
-118,Lance Stroll,116,14,,2020,57.388,Williams,117,1894,34,18
-119,Antonio Giovinazzi,115,13,15,2020,56.887,Sauber,,125,3,
+118,Lance Stroll,116,14,15,2020,57.388,Williams,117,1894,34,18
+119,Antonio Giovinazzi,115,13,,2020,56.887,Sauber,,125,3,
 120,Pierre Gasly,117,15,14,2020,57.22,Toro Rosso,213,3441,110,23
 121,Brendon Hartley,118,2,,2018,69.171,Toro Rosso,,38,,
 122,Charles Leclerc,119,2,2,2021,67.583,Sauber,6,7485,159,308

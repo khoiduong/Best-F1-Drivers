@@ -66,6 +66,8 @@ var timelinezoom = d3.zoom()
     .scaleExtent([1,1])
     .on('zoom', timelineZoomFunc);
 
+
+
 function driverConverter(data) {
     return {
         driverId: +data.driverId,
@@ -137,6 +139,8 @@ console.log(constructors);
 
 // driverid,drivername,bestlaptime,yearbestlaptime,driverstanding,laptime2022,laptime2021,laptime2020,laptime2019
     //Get Data
+
+function drawPlot() {
     function rowConverter(data) {
         return {
             driverid : +data.driverId,
@@ -358,21 +362,36 @@ d3.csv("data/test.csv", rowConverter).then(function (data) {
         .text("Driver Standing (Track Position)");   
 })
 
+}
+drawPlot();
+
 function upYear() {
     if(yearSelected + 1 < 2022)
         {yearSelected = yearSelected + 1;}
+    document.getElementById('yearSelected').innerText = yearSelected;
+    svg.selectAll('*').remove();
+    drawPlot();
 }
 function downYear() {
     if(yearSelected - 1 > 1960)
         {yearSelected = yearSelected - 1;}
+    document.getElementById('yearSelected').innerText = yearSelected;
+    svg.selectAll('*').remove();
+    drawPlot();
 }
 function up5Year() {
     if(yearSelected + 5 < 2022)
         {yearSelected = yearSelected + 5;}
+    document.getElementById('yearSelected').innerText = yearSelected;
+    svg.selectAll('*').remove();
+    drawPlot();
 }
 function down5Year() {
     if(yearSelected - 5 > 1960)
         {yearSelected = yearSelected - 5;}
+    document.getElementById('yearSelected').innerText = yearSelected;
+    svg.selectAll('*').remove();
+    drawPlot();
 }
 
 
