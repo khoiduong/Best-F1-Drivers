@@ -8,19 +8,30 @@
   </head>
   <h1><bold>Best Formula 1 Drivers Through Time</bold></h1>
   <body>
-    <script type="text/javascript" src="scatterplot.js"></script>
-      
-<!--    Can't figure out how to separate the multilinechart and scatterplot-->
-<!--    <script type="text/javascript" src="MultilineChart.js"></script>-->
-      
-    
-<button class="down5Year" onclick="down5Year()">-5 Year</button>
+    <div class="svg1">
+      <script type="text/javascript" src="scatterplot.js"></script>
+    </div>
+    <div class="svg2">
+      <script type="text/javascript" src="MultilineChart.js"></script>
+    </div>
+    <!-- <script type="text/javascript" src="MultilineChart.js"></script> -->
+
+    <!--    Can't figure out how to separate the multilinechart and scatterplot-->
+    <!--    <script type="text/javascript" src="MultilineChart.js"></script>-->
+    <!-- <svg class="linechart" width="50%" height="600"></svg> -->
+    <button class="down5Year" onclick="down5Year()">-5 Year</button>
     <button class="downYear" onclick="downYear()">-1 Year</button>
-    <button class="curYear" id="yearSelected"><script>document.write(yearSelected)</script></button>
+    <button class="curYear" id="yearSelected">
+      <script>
+        document.write(yearSelected);
+      </script>
+    </button>
     <button class="upYear" onclick="upYear()">+1 Year</button>
     <button class="up5Year" onclick="up5Year()">+5 Year</button>
-      <h1></h1>
-      <button class="dark_mode" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <h1></h1>
+    <button class="dark_mode" onclick="toggleDarkMode()">
+      Toggle Dark Mode
+    </button>
     <h1></h1>
   </body>
 
@@ -44,11 +55,15 @@
     <div class="designed">
       <div>Designed For:</div>
       <div>CSE163: Data Visualization, Fall 2022</div>
-      <a href="https://formula-1-cse-163.github.io/Best-F1-Drivers">Hosted on GitHub</a>
+      <a href="https://formula-1-cse-163.github.io/Best-F1-Drivers"
+        >Hosted on GitHub</a
+      >
     </div>
     <div class="links">
       <div class="submit">
-        <a href="https://github.com/Formula-1-CSE-163/Best-F1-Drivers">Files:</a>
+        <a href="https://github.com/Formula-1-CSE-163/Best-F1-Drivers"
+          >Files:</a
+        >
         <div>index.html</div>
         <div>app.js</div>
         <div>style.css</div>
@@ -64,8 +79,11 @@
         <a href="https://bl.ocks.org/mbostock/3887118">Scatterplot</a>
       </div>
       <div class="codesources">
-        <a href="https://www.motorsportstats.com/series/formula-one/summary/2022">F1 Motorsports Statistics</a>
-        </div>
+        <a
+          href="https://www.motorsportstats.com/series/formula-one/summary/2022"
+          >F1 Motorsports Statistics</a
+        >
+      </div>
     </div>
   </div>
 </html>

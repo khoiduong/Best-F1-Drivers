@@ -85,4 +85,10 @@ h1 {
 .grid {
     opacity: 0.3;
 }
+
+.svg2 {
+  position: absolute; 
+  top: 100px; 
+  left: 750px; 
+}
     
