@@ -298,7 +298,7 @@ function drawPlot() {
       .on("mouseout", function (d) {
         tooltip.style("display", "none");
       });
-
+    
     var cName = svg1
       .selectAll(".text")
       .data(data)
@@ -314,16 +314,16 @@ function drawPlot() {
       })
       .attr("fill", "black")
       .text(function (d) {
-        return d.drivername;
+        if (d.driverstanding > 0) {return d.drivername};
       });
 
     // Adds legend as seperate shapes with respective sized cirles and different text
     svg1
       .append("rect")
       .attr("class", "rectLegend")
-      .attr("x", width - 220)
+      .attr("x", width - 100)
       .attr("y", height - 260)
-      .attr("width", 260)
+      .attr("width", 120)
       .attr("height", 255)
       .attr("fill", "lightgrey")
       .style("opacity", 0.9)
