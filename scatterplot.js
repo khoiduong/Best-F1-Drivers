@@ -152,13 +152,8 @@ console.log(constructors);
             teamname: data.constructorName
         }
     }
-var counter = 0;
 d3.csv("data/test.csv", rowConverter).then(function (data) {
-    counter++;
-    console.log(data[counter]);
-    if (data[counter]["driverstanding"] == 0) {
-        return;
-    }
+        
     let color_domain = []
     for(let i = 0; i < data.length; i++){
         if(!color_domain.includes(data[i]["teamid"])){
