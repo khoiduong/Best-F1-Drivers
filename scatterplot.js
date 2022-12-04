@@ -226,7 +226,7 @@ d3.csv("data/test.csv", rowConverter).then(function (data) {
             .style("left", d3.event.pageX + "px")
             .style("top", d3.event.pageY - 55 + "px")
             .style("display", "inline-block")
-            .html('Driver: ' + getDriverName + '<br/>' + 'Team: ' + getTeamName);
+            .html('Driver: ' + d.drivername + '<br/>' + 'Team: ' + getTeamName);
       })
       
       // Makes the tooltip follow the mouse when it is moved
@@ -251,7 +251,7 @@ d3.csv("data/test.csv", rowConverter).then(function (data) {
         .attr("x", function(d) {return xScale(d.bestlaptime);})
         .attr("y", function(d) {return yScale(d.driverstanding - 0.05);})
         .attr("fill", "black")
-        .text(function (d) {return drivers[d.driverid-1]["driverName"]; });
+        .text(function (d) {return d.drivername});
         
     
     
