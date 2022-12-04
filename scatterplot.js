@@ -142,13 +142,24 @@ console.log(constructors);
 
 function drawPlot() {
     function rowConverter(data) {
+        var s = 0;
+        var p = 0;
+        var t = 0;
+        if (yearSelected == 2022) {
+            s = +data.driverStanding2022;
+            p = +data.driverPoints2022;
+        }
+        else {
+            s = +data.driverStanding2021;
+            p = +data.driverPoints2021;
+        }
         return {
             driverid : +data.driverId,
             drivername : data.driverName,
             bestlaptime: +data.bestLapTime,
             yearbestlaptime: +data.yearbestlaptime,
-            driverstanding: +data.driverStanding2022,
-            driverpoints: +data.driverPoints2022,
+            driverstanding: s,
+            driverpoints: p,
             laptime2022: +data.laptime2022,
             laptime2021: +data.laptime2021,
             teamid: +data.constructorId2022,
