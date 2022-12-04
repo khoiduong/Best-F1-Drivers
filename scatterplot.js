@@ -146,6 +146,7 @@ console.log(constructors);
 //Get Data
 
 function drawPlot() {
+
     
 //Define Scales
 var xScale = d3.scaleLinear().range([0, width]);
@@ -188,8 +189,8 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
     };
   }
   d3.csv("data/test.csv", rowConverter).then(function (data) {
-    let color_domain = [];
-    for (let i = 0; i < data.length; i++) {
+    var color_domain = [];
+    for (var i = 0; i < data.length; i++) {
       if (!color_domain.includes(data[i]["teamid"])) {
         color_domain.push(data[i]["teamid"]);
       }
@@ -201,7 +202,7 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
     // 0 to max gdp of data
     xScale.domain([85, 90]);
     // 0 to max ecc of data
-    yScale.domain([1, 15]);
+    yScale.domain([1, 20]);
 
     yAxis.ticks(15);
 
@@ -252,18 +253,17 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
       .attr("cy", function (d) {
         return yScale(d.driverstanding);
       })
+      .style("opacity", "0.75")
       .style("fill", function (d) {
         return colors(d.teamid);
       })
       .on("mouseover", function (d) {
-        var getDriverName;
         var getTeamId = 0;
         var getTeamName;
 
-        getDriverName = new String(drivers[d.driverid - 1]["driverName"]);
         getTeamId = d.teamid;
 
-        for (let i = 0; i < constructors.length; i++) {
+        for (var i = 0; i < constructors.length; i++) {
           if (constructors[i]["teamId"] == getTeamId) {
             getTeamName = new String(constructors[i]["teamName"]);
           }
@@ -311,7 +311,7 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
       })
       .attr("fill", "black")
       .text(function (d) {
-        if (d.driverstanding > 0) {return d.drivername};
+        if (d.driverstanding > 0) {return d.drivername;}
       });
 
     // Adds legend as seperate shapes with respective sized cirles and different text
@@ -337,6 +337,7 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
 
     svg1
       .append("circle")
+      .attr("class", "legendCircle")
       .attr("cx", width - 40)
       .attr("cy", height - 230)
       .attr("r", 10 * Math.sqrt(10 / 5 / Math.PI))
@@ -351,6 +352,7 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
 
     svg1
       .append("circle")
+      .attr("class", "legendCircle")
       .attr("cx", width - 40)
       .attr("cy", height - 190)
       .attr("r", 10 * Math.sqrt(100 / 5 / Math.PI))
@@ -365,6 +367,7 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
 
     svg1
       .append("circle")
+      .attr("class", "legendCircle")
       .attr("cx", width - 40)
       .attr("cy", height - 105)
       .attr("r", 10 * Math.sqrt(400 / 5 / Math.PI))
@@ -409,7 +412,7 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
       .attr("x", width / 2)
       .style("text-anchor", "middle")
       .attr("font-size", "12px")
-      .text("Best Lap Time (Seconds)");
+      .text("Average Lap Time (Seconds)");
 
     svg1
       .append("g")
@@ -421,7 +424,7 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .attr("font-size", "12px")
-      .text("Driver Standing (Track Position)");
+      .text("Driver Standings");
   });
 }
 drawPlot();
@@ -440,6 +443,7 @@ function downYear() {
   }
   document.getElementById("yearSelected").innerText = yearSelected;
   svg1.selectAll("*").remove();
+  toggleDarkMode();
   drawPlot();
 }
 function up5Year() {
@@ -469,9 +473,11 @@ function toggleDarkMode() {
     svg1.selectAll(".label").attr("fill", "white");
     svg1.selectAll(".legend").attr("fill", "white");
     svg1.selectAll(".legendTitle").style("fill", "lime");
+    svg1.selectAll(".legendCircle").style("fill", "#0D1430");  
+      
     svg1.selectAll(".rectLegend").attr("fill", "#5A5A5A");
 
-    timelinesvg.selectAll(".timeaxis").attr("color", "white");
+//    timelinesvg.selectAll(".timeaxis").attr("color", "white");
   } else {
     document.body.style.backgroundColor = "white";
     document.getElementById("endinfo").style.backgroundColor = "lightgrey";
@@ -480,8 +486,9 @@ function toggleDarkMode() {
     svg1.selectAll(".label").attr("fill", "black");
     svg1.selectAll(".legend").attr("fill", "black");
     svg1.selectAll(".legendTitle").style("fill", "green");
+    svg1.selectAll(".legendCircle").style("fill", "white");
+      
     svg1.selectAll(".rectLegend").attr("fill", "lightgrey");
-
-    timelinesvg.selectAll(".timeaxis").attr("color", "black");
+//    timelinesvg.selectAll(".timeaxis").attr("color", "black");
   }
 }
