@@ -161,31 +161,34 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
     var s = +data.driverStanding2022;
     var p = +data.driverPoints2022;
     var t = +data.constructorId2022;
+    var l = +data.avgLap2022;
       
     if (yearSelected == 2021) {
-      s = +data.driverStanding2021;
-      p = +data.driverPoints2021;
-      t = +data.constructorId2021;
+        s = +data.driverStanding2021;
+        p = +data.driverPoints2021;
+        t = +data.constructorId2021;
+        l = +data.avgLap2021;
     }
     else if (yearSelected == 2020) {
-      s = +data.driverStanding2020;
-      p = +data.driverPoints2020;
-      t = +data.constructorId2020;
+        s = +data.driverStanding2020;
+        p = +data.driverPoints2020;
+        t = +data.constructorId2020;
+        l = +data.avgLap2020;
     }
 
     return {
-      driverid: +data.driverId,
-      drivername: data.driverName,
-      bestlaptime: +data.bestLapTime,
-      avglaptime: +data.avgLap2022,
-      yearbestlaptime: +data.yearbestlaptime,
-      driverstanding: s,
-      driverpoints: p,
-      laptime2022: +data.laptime2022,
-      laptime2021: +data.laptime2021,
-      teamid: t,
-      teamstanding: +data.teamstanding,
-      teamname: data.constructorName,
+        driverid: +data.driverId,
+        drivername: data.driverName,
+        bestlaptime: +data.bestLapTime,
+        avglaptime: l,
+        yearbestlaptime: +data.yearbestlaptime,
+        driverstanding: s,
+        driverpoints: p,
+        laptime2022: +data.laptime2022,
+        laptime2021: +data.laptime2021,
+        teamid: t,
+        teamstanding: +data.teamstanding,
+        teamname: data.constructorName,
     };
   }
   d3.csv("data/test.csv", rowConverter).then(function (data) {

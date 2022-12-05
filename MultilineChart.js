@@ -19,7 +19,7 @@ var svg = d3
   .select(".svg2")
   .append("svg")
   //.attr("width", width + margin.left + margin.right)
-  .attr("width", "800")
+  .attr("width", "600")
   .attr("height", chart_height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");

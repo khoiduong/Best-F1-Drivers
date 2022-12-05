@@ -29,7 +29,7 @@ with open('data/races.csv', 'r') as csv_races:
         temp[row[1]].append(row[0])
 
 while True:
-    driver_name = input("Enter driver name: ")
+    driver_name = input("\nEnter driver name: ")
     driver_id = 0
     if (len(driver_name) <= 2):
         driver_id = int(input("Enter driver id: "))
@@ -43,7 +43,7 @@ while True:
 
 
     # print(temp)
-    for year in range(1996, 2023):
+    for year in range(1990, 2023):
         driver = []
         with open('data/results.csv', 'r') as csv_file:
             reader = csv.reader(csv_file)
