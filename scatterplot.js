@@ -412,7 +412,7 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
       .attr("x", width / 2)
       .style("text-anchor", "middle")
       .attr("font-size", "12px")
-      .text("Average Lap Time (Seconds)");
+      .text("Average Qualifying Lap Time (Seconds)");
 
     svg1
       .append("g")
@@ -443,7 +443,6 @@ function downYear() {
   }
   document.getElementById("yearSelected").innerText = yearSelected;
   svg1.selectAll("*").remove();
-  toggleDarkMode();
   drawPlot();
 }
 function up5Year() {
