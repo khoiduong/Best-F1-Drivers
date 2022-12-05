@@ -22,7 +22,7 @@ var svg = d3
   .attr("width", "560")
   .attr("height", chart_height + margin.top + margin.bottom)
   .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .attr("transform", "translate(" + 5 + margin.left + "," + margin.top + ")");
 
 var xScale = d3.scaleLinear().range([0, chart_width]);
 var yScale = d3.scaleLinear().range([chart_height, 0]);
@@ -31,52 +31,49 @@ var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 var xAxis = d3.axisBottom(xScale);
 var yAxis = d3.axisLeft(yScale);
 
+// hard coded driver id's
+var driverList = [
+  //driver Ids
+    1, 108
+];
+
 function rowConverter(d) {
-  var countryList = [
-    "Brazil",
-    "Russia",
-    "China",
-    "Brazil",
-    "India",
-    "South Africa",
-    "United States",
-  ];
-  if (countryList.includes(d["Country Name"])) {
-    return {
-      "Country Name": d["Country Name"],
-      years: [
-        [2000, parseFloat(d["2000"])],
-        [2001, parseFloat(d["2001"])],
-        [2002, parseFloat(d["2002"])],
-        [2003, parseFloat(d["2003"])],
-        [2004, parseFloat(d["2004"])],
-        [2005, parseFloat(d["2005"])],
-        [2006, parseFloat(d["2006"])],
-        [2007, parseFloat(d["2007"])],
-        [2008, parseFloat(d["2008"])],
-        [2009, parseFloat(d["2009"])],
-        [2010, parseFloat(d["2010"])],
-        [2011, parseFloat(d["2011"])],
-        [2012, parseFloat(d["2012"])],
-        [2013, parseFloat(d["2013"])],
-        [2014, parseFloat(d["2014"])],
-      ],
-    };
-  }
+    if (d.driverId == driverList[1] || d.driverId == driverList[0])
+        {
+            return {
+                dName: d.driverName,
+                dId: +d.driverId,
+                dPointYears: [/*
+                [2004,+d.driverPoints2004],
+                [2005,+d.driverPoints2005],
+                [2006,+d.driverPoints2006],
+                [2007,+d.driverPoints2007],
+                [2008,+d.driverPoints2008],
+                [2009,+d.driverPoints2009],
+                [2010,+d.driverPoints2010],
+                [2011,+d.driverPoints2011],
+                [2012,+d.driverPoints2012],
+                [2013,+d.driverPoints2013],
+                [2014,+d.driverPoints2014],
+                [2015,+d.driverPoints2015],
+                [2016,+d.driverPoints2016],
+                    */
+                [2017,+d.driverPoints2017],
+                [2018,+d.driverPoints2018],
+                [2019,+d.driverPoints2019],
+                [2020,+d.driverPoints2020],
+                [2021,+d.driverPoints2021],
+                [2022,+d.driverPoints2022]
+                ]
+            }   
+        }
 }
 
-var startYear = 2000;
-var endYear = 2014;
+var startYear = 2004;
+var endYear = 2022;
 
-var countryList = [
-  "Brazil",
-  "Russia",
-  "China",
-  "Brazil",
-  "India",
-  "South Africa",
-  "United States",
-];
+var years = [/*2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016,*/ 2017, 2018, 2019, 2020, 2021, 2022]
+
 
 // gridlines in x axis function
 function make_x_gridlines() {
@@ -89,7 +86,7 @@ function make_y_gridlines() {
 }
 
 // This function parses the data using rowConverter and makes the bar chart based on that data
-d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
+d3.csv("data/test3.csv", rowConverter).then(function (data) {
   console.log(data);
   //    var cities = data.columns.slice(1).map(function(id) {
   //    return {
@@ -103,11 +100,11 @@ d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
   var idx = 0;
 
   // Setting the ranges for the x domain, y domain, and color domain
-  xScale.domain([2000, 2014]);
-  yScale.domain([0, 320]);
+  xScale.domain([2004, 2022]);
+  yScale.domain([0, 600]);
 
   // Setting the color domain from 0 to 5 because there are 6 countries that need 6 different colors
-  colorScale.domain([0, 5]);
+  colorScale.domain([0, 1]);
   //    x.domain(data.map(function(d){ return d.years[idx++][0]; }));
 
   // add the X gridlines
@@ -130,10 +127,10 @@ d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
   // the d3.line() function returns a line so we save it to lineGen
   var lineGen = d3
     .line()
-    .x(function (d) {
+    .x(function (d) { //year
       return xScale(d[0]);
     })
-    .y(function (d) {
+    .y(function (d) { //points
       return yScale(d[1]);
     });
 
@@ -144,12 +141,12 @@ d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
   group = svg.append("g").attr("class", "countryLines");
 
   // Goes through each individual line
-  for (let x = 0; x < data.length; x++) {
+  for (let x = 0; x < 2; x++) {
     // Creates the path with the country
     line = group
       .append("path")
-      .attr("class", data[x]["Country Name"] + " line")
-      .attr("d", lineGen(data[x]["years"]))
+      .attr("class", data[x][0] + " line")
+      .attr("d", lineGen(data[x]["dPointYears"]))
       .attr("stroke", colorScale(x))
       .attr("stroke-width", "2")
       .attr("fill", "none");
@@ -170,8 +167,8 @@ d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
     text = group
       .append("text")
       .attr("class", "countryLabel")
-      .text(data[x]["Country Name"])
-      .attr("y", yScale(data[x]["years"][endYear - startYear][1]))
+      .text(data[x]["dName"])
+      .attr("y", yScale(data[x]["dPointYears"][2022-2017][1]))
       .attr("x", chart_width + 10)
       .attr("font-size", "14px");
     // .style("opacity")
@@ -188,7 +185,7 @@ d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
   svg
     .append("g")
     .attr("class", "axis axis--y")
-    .attr("transform", "translate(" + chart_width + ",0")
+    .attr("transform", "translate(" + 0 + ",0)")
     .call(yAxis);
 
   // This function creates the y-axis label, and positions it near the y-axis with respect to the margins,
@@ -200,7 +197,7 @@ d3.csv("data/EPCSmallMillionBTU.csv", rowConverter).then(function (data) {
     .attr("x", 0 - chart_height / 2)
     .attr("dy", "-2.8em")
     .style("text-anchor", "middle")
-    .text("Millions of BTUs Per Person")
+    .text("Points")
     .attr("font-size", "14px");
 
   // Adding the Year label on y axis
