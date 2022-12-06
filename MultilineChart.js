@@ -28,7 +28,7 @@ var xScale = d3.scaleLinear().range([0, chart_width]);
 var yScale = d3.scaleLinear().range([chart_height, 0]);
 var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
-var xAxis = d3.axisBottom(xScale);
+var xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
 var yAxis = d3.axisLeft(yScale);
 
 // hard coded driver id's
