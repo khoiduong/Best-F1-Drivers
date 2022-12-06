@@ -15,7 +15,7 @@ var margin = { top: 10, right: 90, bottom: 150, left: 0 },
   chart_width = 500 - margin.left - margin.right,
   chart_height = 500 - margin.top - margin.bottom;
 
-var svg = d3
+var svg2 = d3
   .select(".svg2")
   .append("svg")
   //.attr("width", width + margin.left + margin.right)
@@ -27,6 +27,8 @@ var svg = d3
 var xScale = d3.scaleLinear().range([0, chart_width]);
 var yScale = d3.scaleLinear().range([chart_height, 0]);
 var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
+var isDark2 = false;
 
 var xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
 var yAxis = d3.axisLeft(yScale);
@@ -108,7 +110,7 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
 
   // add the X gridlines
   for (let x = 50; x < endYear; x += 50) {
-    svg
+    svg2
       .append("g")
       .attr("class", "grid")
       .attr("transform", "translate(0," + yScale(x) + ")")
@@ -116,7 +118,7 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
   }
   // add the Y gridlines
   for (let x = startYear; x < endYear; x += 1) {
-    svg
+    svg2
       .append("g")
       .attr("class", "grid")
       .attr("transform", "translate(" + xScale(x) + ",0)")
@@ -137,7 +139,7 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
   lineGen.curve(d3.curveBasis);
 
   var line;
-  group = svg.append("g").attr("class", "countryLines");
+  group = svg2.append("g").attr("class", "countryLines");
 
   // Goes through each individual line
   for (let x = 0; x < 2; x++) {
@@ -174,14 +176,14 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
   }
 
   // Draw xAxis and position the label
-  svg
+  svg2
     .append("g")
     .attr("class", "axis--x")
     .attr("transform", "translate(0," + chart_height + ")")
     .call(xAxis);
 
   // Draw yAxis and position the label
-  svg
+  svg2
     .append("g")
     .attr("class", "axis--y")
     .attr("transform", "translate(" + 0 + ",0)")
@@ -189,7 +191,7 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
 
   // This function creates the y-axis label, and positions it near the y-axis with respect to the margins,
   // and based on the pre-defined height
-  svg
+  svg2
     .append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.leftx)
@@ -200,7 +202,7 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
     .attr("font-size", "14px");
 
   // Adding the Year label on y axis
-  svg
+  svg2
     .append("text")
     .attr("y", 0 - margin.leftx)
     .attr("x", chart_width)
@@ -209,3 +211,17 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
     .attr("font-size", "14px");
 });
 
+function temp2() {
+    var background = document.body.style.backgroundColor;
+    if (isDark2 == false) {    
+        svg2.selectAll("g").attr("color", "white");
+        svg2.selectAll("text").attr("fill", "white");
+        isDark2 = true;
+    }
+    
+    else {
+        svg2.selectAll("g").attr("color", "black");
+        svg2.selectAll("text").attr("fill", "black");
+        isDark2 = false;
+    }
+}
