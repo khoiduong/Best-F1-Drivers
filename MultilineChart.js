@@ -43,7 +43,7 @@ function rowConverter(d) {
             return {
                 dName: d.driverName,
                 dId: +d.driverId,
-                dPointYears: [/*
+                dPointYears: [
                 [2004,+d.driverPoints2004],
                 [2005,+d.driverPoints2005],
                 [2006,+d.driverPoints2006],
@@ -57,7 +57,6 @@ function rowConverter(d) {
                 [2014,+d.driverPoints2014],
                 [2015,+d.driverPoints2015],
                 [2016,+d.driverPoints2016],
-                    */
                 [2017,+d.driverPoints2017],
                 [2018,+d.driverPoints2018],
                 [2019,+d.driverPoints2019],
@@ -86,7 +85,7 @@ function make_y_gridlines() {
 }
 
 // This function parses the data using rowConverter and makes the bar chart based on that data
-d3.csv("data/test3.csv", rowConverter).then(function (data) {
+d3.csv("data/F1data.csv", rowConverter).then(function (data) {
   console.log(data);
   //    var cities = data.columns.slice(1).map(function(id) {
   //    return {
@@ -168,7 +167,7 @@ d3.csv("data/test3.csv", rowConverter).then(function (data) {
       .append("text")
       .attr("class", "countryLabel")
       .text(data[x]["dName"])
-      .attr("y", yScale(data[x]["dPointYears"][2022-2017][1]))
+      .attr("y", yScale(data[x]["dPointYears"][2022-2004][1]))
       .attr("x", chart_width + 10)
       .attr("font-size", "14px");
     // .style("opacity")
