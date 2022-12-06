@@ -303,7 +303,7 @@ function drawPlot() {
             teamname: data.constructorName,
         };
     }
-      d3.csv("data/test.csv", rowConverter).then(function (data) {
+      d3.csv("data/F1data.csv", rowConverter).then(function (data) {
         var color_domain = [];
         for (var i = 0; i < data.length; i++) {
           if (!color_domain.includes(data[i]["teamid"])) {
@@ -315,7 +315,7 @@ function drawPlot() {
         //console.log(color_domain);
 
         // 0 to max gdp of data
-        xScale.domain([85, 90]);
+        xScale.domain([80, 100]);
         // 0 to max ecc of data
         yScale.domain([1, 20]);
 
@@ -553,7 +553,7 @@ function upYear() {
   drawPlot();
 }
 function downYear() {
-  if (yearSelected - 1 > 1995) {
+  if (yearSelected - 1 > 2003) {
     yearSelected = yearSelected - 1;
   }
   document.getElementById("yearSelected").innerText = yearSelected;
@@ -569,7 +569,7 @@ function up5Year() {
   drawPlot();
 }
 function down5Year() {
-  if (yearSelected - 5 > 1995) {
+  if (yearSelected - 5 > 2003) {
     yearSelected = yearSelected - 5;
   }
   document.getElementById("yearSelected").innerText = yearSelected;

@@ -12,14 +12,14 @@
 //    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var margin = { top: 10, right: 90, bottom: 150, left: 0 },
-  chart_width = 550 - margin.left - margin.right,
+  chart_width = 500 - margin.left - margin.right,
   chart_height = 500 - margin.top - margin.bottom;
 
 var svg = d3
   .select(".svg2")
   .append("svg")
   //.attr("width", width + margin.left + margin.right)
-  .attr("width", "560")
+  .attr("width", "580")
   .attr("height", chart_height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + 5 + margin.left + "," + margin.top + ")");
