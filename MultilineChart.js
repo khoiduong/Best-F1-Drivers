@@ -176,14 +176,14 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
   // Draw xAxis and position the label
   svg
     .append("g")
-    .attr("class", "axis axis--x")
+    .attr("class", "axis--x")
     .attr("transform", "translate(0," + chart_height + ")")
     .call(xAxis);
 
   // Draw yAxis and position the label
   svg
     .append("g")
-    .attr("class", "axis axis--y")
+    .attr("class", "axis--y")
     .attr("transform", "translate(" + 0 + ",0)")
     .call(yAxis);
 
@@ -208,3 +208,4 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
     .text("Year")
     .attr("font-size", "14px");
 });
+

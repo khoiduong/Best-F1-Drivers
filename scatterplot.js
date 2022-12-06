@@ -9,6 +9,8 @@ var margin = { left: 80, right: 10, top: 50, bottom: 50 },
 // Schemecategory20 got removed in v4
 var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
+var isDark = false;
+
 //Define SVG
 var svg1 = d3
   .select(".svg1")
@@ -526,6 +528,8 @@ function drawPlot() {
 }
 drawPlot();
 
+var delayInMilliseconds = 10;
+
 function upYear() {
   if (yearSelected + 1 < 2023) {
     yearSelected = yearSelected + 1;
@@ -533,6 +537,12 @@ function upYear() {
   document.getElementById("yearSelected").innerText = yearSelected;
   svg1.selectAll("*").remove();
   drawPlot();
+    
+  if (isDark) {
+    setTimeout(function() {
+        temp();
+    }, delayInMilliseconds);
+  }
 }
 function downYear() {
   if (yearSelected - 1 > 2003) {
@@ -541,6 +551,12 @@ function downYear() {
   document.getElementById("yearSelected").innerText = yearSelected;
   svg1.selectAll("*").remove();
   drawPlot();
+    
+  if (isDark) {
+    setTimeout(function() {
+        temp();
+    }, delayInMilliseconds);
+  }
 }
 function up5Year() {
   if (yearSelected + 5 < 2023) {
@@ -549,6 +565,12 @@ function up5Year() {
   document.getElementById("yearSelected").innerText = yearSelected;
   svg1.selectAll("*").remove();
   drawPlot();
+    
+  if (isDark) {
+    setTimeout(function() {
+        temp();
+    }, delayInMilliseconds);
+  }
 }
 function down5Year() {
   if (yearSelected - 5 > 2003) {
@@ -557,11 +579,30 @@ function down5Year() {
   document.getElementById("yearSelected").innerText = yearSelected;
   svg1.selectAll("*").remove();
   drawPlot();
+    
+  if (isDark) {
+    setTimeout(function() {
+        temp();
+    }, delayInMilliseconds);
+  }
 }
 
+function temp() {
+    document.body.style.backgroundColor = "#0D1430";
+    document.getElementById("endinfo").style.backgroundColor = "#5A5A5A";
+    console.log("im mad");
+    svg1.selectAll("g").attr("color", "white");
+    svg1.selectAll(".label").attr("fill", "white");
+    svg1.selectAll(".legend").attr("fill", "white");
+    svg1.selectAll(".legendTitle").style("fill", "lime");
+    svg1.selectAll(".legendCircle").style("fill", "#0D1430");
+
+    svg1.selectAll(".rectLegend").attr("fill", "#5A5A5A");
+}
 function toggleDarkMode() {
   var background = document.body.style.backgroundColor;
-  if (background == "white") {
+  if (!isDark) {
+
     document.body.style.backgroundColor = "#0D1430";
     document.getElementById("endinfo").style.backgroundColor = "#5A5A5A";
 
@@ -572,9 +613,11 @@ function toggleDarkMode() {
     svg1.selectAll(".legendCircle").style("fill", "#0D1430");
 
     svg1.selectAll(".rectLegend").attr("fill", "#5A5A5A");
+    isDark = true;
 
     //    timelinesvg.selectAll(".timeaxis").attr("color", "white");
   } else {
+
     document.body.style.backgroundColor = "white";
     document.getElementById("endinfo").style.backgroundColor = "lightgrey";
 
@@ -585,6 +628,7 @@ function toggleDarkMode() {
     svg1.selectAll(".legendCircle").style("fill", "white");
 
     svg1.selectAll(".rectLegend").attr("fill", "lightgrey");
+    isDark = false;
     //    timelinesvg.selectAll(".timeaxis").attr("color", "black");
   }
 }
