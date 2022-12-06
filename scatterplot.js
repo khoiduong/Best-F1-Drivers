@@ -14,7 +14,7 @@ var svg1 = d3
   .select(".svg1")
   .append("svg")
   //.attr("width", width + margin.left + margin.right)
-  .attr("width", "67%")
+  .attr("width", "62%")
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
