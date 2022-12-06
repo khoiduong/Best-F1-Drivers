@@ -315,7 +315,7 @@ function drawPlot() {
         //console.log(color_domain);
 
         // 0 to max gdp of data
-        xScale.domain([80, 100]);
+        xScale.domain([d3.min(data.map(function(d){ if (d.avglaptime > 0 && (d.driverstanding <= 20 && d.driverstanding > 0) && d.driverpoints > 0){return d.avglaptime;} })) - 1, d3.max(data.map(function(d){ if (d.driverstanding <= 20 && d.driverstanding > 0) return d.avglaptime; }))]);
         // 0 to max ecc of data
         yScale.domain([1, 20]);
 
