@@ -19,6 +19,8 @@ with open('data/drivers.csv', encoding="utf-8") as csv_drivers:
             continue
         drivers[(row[4] + " " + row[5])] = row[0]
 
+print(drivers)
+
 with open('data/races.csv', 'r') as csv_races:
     reader = csv.reader(csv_races)
     for row in reader:
