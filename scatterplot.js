@@ -387,6 +387,7 @@ function drawPlot() {
         }
         else{
             lineData.splice(lineData.indexOf(d.drivername), 1);
+            drawLineChart();
         }
         console.log(lineData);
       })
