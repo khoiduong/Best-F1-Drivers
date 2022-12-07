@@ -223,6 +223,9 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
     .attr("dy", "-2.8em")
     .text("Year")
     .attr("font-size", "14px");
+    
+  svg2.selectAll("g").attr("color", "crimson");
+  svg2.selectAll("text").attr("fill", "crimson");
 });
 
 function temp2() {
