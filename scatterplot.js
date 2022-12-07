@@ -1,6 +1,6 @@
 var main_body_width = parseInt(d3.select("body").style("width"));
 
-function drawMainGraph() {
+
     console.log(main_body_width);
     //Define Margin
     var margin = { left: 80, right: 0, top: 50, bottom: 50 },
@@ -143,7 +143,7 @@ function drawMainGraph() {
     console.log(races);
     console.log(constructors);
     
-    function drawPlot() {
+function drawPlot() {
   //Define Scales
   var xScale = d3.scaleLinear().range([0, width]);
 
@@ -642,7 +642,5 @@ function toggleDarkMode() {
     //    timelinesvg.selectAll(".timeaxis").attr("color", "black");
   }
 }
-}
-drawMainGraph();
 drawLineChart();
 
