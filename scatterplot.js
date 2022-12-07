@@ -382,13 +382,14 @@ function drawPlot() {
       })
 
       .on("click", function (d) {
+        clearLines();
         if(!lineData.includes(d.drivername)){
             lineData.push(d.drivername);
         }
         else{
             lineData.splice(lineData.indexOf(d.drivername), 1);
-            drawLineChart();
         }
+        drawLineChart();
         console.log(lineData);
       })
       
@@ -644,4 +645,3 @@ function toggleDarkMode() {
   }
 }
 drawLineChart();
-

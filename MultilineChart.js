@@ -1,4 +1,4 @@
-var lineData = ["Carlos Sainz"];
+var lineData = [];
 
 //var margin = { top: 10, right: 90, bottom: 150, left: (2 * main_body_width / 3) },
 //  chart_width = ((3 * main_body_width) / 10) - margin.right,
@@ -54,34 +54,32 @@ console.log("asssssssssssssssssss");
 console.log(driverList);    
     
 function rowConverter(d) {
-    if (d.driverId == driverList[1] || d.driverId == driverList[0])
-        {
-            return {
-                dName: d.driverName,
-                dId: +d.driverId,
-                dPointYears: [
-                [2004,+d.driverPoints2004],
-                [2005,+d.driverPoints2005],
-                [2006,+d.driverPoints2006],
-                [2007,+d.driverPoints2007],
-                [2008,+d.driverPoints2008],
-                [2009,+d.driverPoints2009],
-                [2010,+d.driverPoints2010],
-                [2011,+d.driverPoints2011],
-                [2012,+d.driverPoints2012],
-                [2013,+d.driverPoints2013],
-                [2014,+d.driverPoints2014],
-                [2015,+d.driverPoints2015],
-                [2016,+d.driverPoints2016],
-                [2017,+d.driverPoints2017],
-                [2018,+d.driverPoints2018],
-                [2019,+d.driverPoints2019],
-                [2020,+d.driverPoints2020],
-                [2021,+d.driverPoints2021],
-                [2022,+d.driverPoints2022]
-                ]
-            }   
-        }
+    console.log(d.driverId);
+    return {
+        dName: d.driverName,
+        dId: +d.driverId,
+        dPointYears: [
+        [2004,+d.driverPoints2004],
+        [2005,+d.driverPoints2005],
+        [2006,+d.driverPoints2006],
+        [2007,+d.driverPoints2007],
+        [2008,+d.driverPoints2008],
+        [2009,+d.driverPoints2009],
+        [2010,+d.driverPoints2010],
+        [2011,+d.driverPoints2011],
+        [2012,+d.driverPoints2012],
+        [2013,+d.driverPoints2013],
+        [2014,+d.driverPoints2014],
+        [2015,+d.driverPoints2015],
+        [2016,+d.driverPoints2016],
+        [2017,+d.driverPoints2017],
+        [2018,+d.driverPoints2018],
+        [2019,+d.driverPoints2019],
+        [2020,+d.driverPoints2020],
+        [2021,+d.driverPoints2021],
+        [2022,+d.driverPoints2022]
+        ]
+    }   
 }
 
 var startYear = 2004;
@@ -155,7 +153,9 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
   group = svg2.append("g").attr("class", "countryLines");
 
   // Goes through each individual line
-  for (let x = 0; x < lineData.length; x++) {
+  for (let x = 0; x < data.length; x++) {
+      console.log(data);
+      if(driverList.includes(data[x]['dId'])){
     // Creates the path with the country
     line = group
       .append("path")
@@ -186,6 +186,7 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
       .attr("x", chart_width + 10)
       .attr("font-size", "14px");
     // .style("opacity")
+    }
   }
 
   // Draw xAxis and position the label
@@ -240,6 +241,7 @@ function temp2() {
 }
 }
 
-function testhi(){
-    console.log("hi");
+function clearLines(){
+    console.log("remove");
+    d3.select(".svg2 svg").remove();
 }
