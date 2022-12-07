@@ -1,4 +1,4 @@
-var lineData = [];
+var lineData = ['AdolfBrudes'];
 function drawLineChart(){
 //var margin = { top: 10, right: 90, bottom: 150, left: (2 * main_body_width / 3) },
 //  chart_width = ((3 * main_body_width) / 10) - margin.right,
@@ -13,6 +13,25 @@ function drawLineChart(){
 //  .append("g")
 //  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+function driverConverter(data) {
+  return {
+    driverId: +data.driverId,
+    driverSurname: data.surname,
+    driverFirstname: data.forename,
+  };
+}
+    
+var driversLine = {};
+d3.csv("data/drivers.csv", driverConverter).then(function (data) {
+  for (var i = 0; i < data.length; i++) {
+    driversLine[`${data[i].driverFirstname}${data[i].driverSurname}`] = data[i].driverId;
+//    driversLine.push({
+//      driverId: data[i].driverId,
+//      driverName: data[i].driverFirstname + " " + data[i].driverSurname,
+//    });
+  }
+});
+    
 var margin = { top: 10, right: 90, bottom: 150, left: 0 },
   chart_width = ((3 * main_body_width) / 10) - margin.left - margin.right,
   chart_height = 500 - margin.top - margin.bottom;
@@ -36,11 +55,22 @@ var xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
 var yAxis = d3.axisLeft(yScale);
 
 // hard coded driver id's
-var driverList = [
-  //driver Ids
-    1, 108
-];
+console.log("before");
+console.log(driversLine);
+console.log("never");
+console.log(driversLine["Carlos Sainz"]);
+console.log("before");
 
+    
+var driverList = [];
+
+for (var nnr = 0; nnr < lineData.length; nnr++) {
+    driverList.push(driversLine[lineData[nnr]]);
+}
+
+console.log("asssssssssssssssssss");
+console.log(driverList);    
+    
 function rowConverter(d) {
     if (d.driverId == driverList[1] || d.driverId == driverList[0])
         {
