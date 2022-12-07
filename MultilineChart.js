@@ -113,7 +113,7 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
 
   // Setting the ranges for the x domain, y domain, and color domain
   xScale.domain([2004, 2022]);
-  yScale.domain([0, 600]);
+  yScale.domain([0, 460]);
 
   // Setting the color domain from 0 to 5 because there are 6 countries that need 6 different colors
   colorScale.domain([0, 1]);
