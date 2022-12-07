@@ -21,7 +21,6 @@ var svg1 = d3
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.selectAll(".button").attr("transform", "translate(" + 500 + "," + margin.top + ")");
 
 var startDate = "1990-01-01";
 var endDate = "2010-01-01";

@@ -1,15 +1,17 @@
+
+
+//var margin = { top: 10, right: 90, bottom: 150, left: (2 * main_body_width / 3) },
+//  chart_width = ((3 * main_body_width) / 10) - margin.right,
+//  chart_height = 500 - margin.top - margin.bottom;
 //
-//var margin = {top: 10, right: 40, bottom: 50, left: 50},
-//    width = 760 - margin.left - margin.right,
-//    height = 500 - margin.top - margin.bottom;
-//
-//
-//
-//var svg = d3.select("body").append("svg")
-//    .attr("width", width + margin.left + margin.right)
-//    .attr("height", height + margin.top + margin.bottom)
-//    .append("g")
-//    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+//var svg2 = d3
+//  .select(".svg2")
+//  .append("svg")
+//  //.attr("width", width + margin.left + margin.right)
+//  .attr("width", "" + 500 + "px")
+//  .attr("height", chart_height + margin.top + margin.bottom)
+//  .append("g")
+//  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var margin = { top: 10, right: 90, bottom: 150, left: 0 },
   chart_width = ((3 * main_body_width) / 10) - margin.left - margin.right,
@@ -19,10 +21,10 @@ var svg2 = d3
   .select(".svg2")
   .append("svg")
   //.attr("width", width + margin.left + margin.right)
-  .attr("width", "" + main_body_width + "px")
+  .attr("width", "" + ((40 * main_body_width) / 100) + "px")
   .attr("height", chart_height + margin.top + margin.bottom)
   .append("g")
-  .attr("transform", "translate(" + ((2 * main_body_width) / 3) + margin.left + "," + margin.top + ")");
+  .attr("transform", "translate(" + ((8 * main_body_width) / 100) + margin.left + "," + margin.top + ")");
 
 var xScale = d3.scaleLinear().range([0, chart_width]);
 var yScale = d3.scaleLinear().range([chart_height, 0]);
