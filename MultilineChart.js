@@ -12,17 +12,17 @@
 //    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var margin = { top: 10, right: 90, bottom: 150, left: 0 },
-  chart_width = 500 - margin.left - margin.right,
+  chart_width = ((3 * main_body_width) / 10) - margin.left - margin.right,
   chart_height = 500 - margin.top - margin.bottom;
 
 var svg2 = d3
   .select(".svg2")
   .append("svg")
   //.attr("width", width + margin.left + margin.right)
-  .attr("width", "580")
+  .attr("width", "" + main_body_width + "px")
   .attr("height", chart_height + margin.top + margin.bottom)
   .append("g")
-  .attr("transform", "translate(" + 5 + margin.left + "," + margin.top + ")");
+  .attr("transform", "translate(" + ((2 * main_body_width) / 3) + margin.left + "," + margin.top + ")");
 
 var xScale = d3.scaleLinear().range([0, chart_width]);
 var yScale = d3.scaleLinear().range([chart_height, 0]);

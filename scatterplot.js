@@ -1,8 +1,8 @@
 var main_body_width = parseInt(d3.select("body").style("width"));
 console.log(main_body_width);
 //Define Margin
-var margin = { left: 80, right: 10, top: 50, bottom: 50 },
-  width = (2 * main_body_width) / 3 - margin.left - margin.right - 100,
+var margin = { left: 80, right: 0, top: 50, bottom: 50 },
+  width = ((2 * main_body_width) / 3) - margin.left - margin.right - 100,
   height = 700 - margin.top - margin.bottom;
 
 //Define Color
@@ -16,10 +16,12 @@ var svg1 = d3
   .select(".svg1")
   .append("svg")
   //.attr("width", width + margin.left + margin.right)
-  .attr("width", "62%")
+  .attr("width", "63%")
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.selectAll(".button").attr("transform", "translate(" + 500 + "," + margin.top + ")");
 
 var startDate = "1990-01-01";
 var endDate = "2010-01-01";
@@ -290,7 +292,7 @@ function drawPlot() {
             return d.avglaptime;
           }
         })
-      ) - 1,
+      ) - 0.5,
       d3.max(
         data.map(function (d) {
           if (d.driverstanding <= 20 && d.driverstanding > 0)
