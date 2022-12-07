@@ -1,5 +1,5 @@
-
-
+var lineData = [];
+function drawLineChart(){
 //var margin = { top: 10, right: 90, bottom: 150, left: (2 * main_body_width / 3) },
 //  chart_width = ((3 * main_body_width) / 10) - margin.right,
 //  chart_height = 500 - margin.top - margin.bottom;
@@ -144,7 +144,7 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
   group = svg2.append("g").attr("class", "countryLines");
 
   // Goes through each individual line
-  for (let x = 0; x < 2; x++) {
+  for (let x = 0; x < lineData.length; x++) {
     // Creates the path with the country
     line = group
       .append("path")
@@ -226,4 +226,9 @@ function temp2() {
         svg2.selectAll("text").attr("fill", "black");
         isDark2 = false;
     }
+}
+}
+
+function testhi(){
+    console.log("hi");
 }

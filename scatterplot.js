@@ -1,150 +1,149 @@
 var main_body_width = parseInt(d3.select("body").style("width"));
-console.log(main_body_width);
-//Define Margin
-var margin = { left: 80, right: 0, top: 50, bottom: 50 },
-  width = ((2 * main_body_width) / 3) - margin.left - margin.right - 100,
-  height = 700 - margin.top - margin.bottom;
 
-//Define Color
-// Schemecategory20 got removed in v4
-var colors = d3.scaleOrdinal(d3.schemeCategory10);
+function drawMainGraph() {
+    console.log(main_body_width);
+    //Define Margin
+    var margin = { left: 80, right: 0, top: 50, bottom: 50 },
+      width = ((2 * main_body_width) / 3) - margin.left - margin.right - 100,
+      height = 700 - margin.top - margin.bottom;
 
-var isDark = false;
+    //Define Color
+    // Schemecategory20 got removed in v4
+    var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-//Define SVG
-var svg1 = d3
-  .select(".svg1")
-  .append("svg")
-  //.attr("width", width + margin.left + margin.right)
-  .attr("width", "63%")
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var isDark = false;
+
+    //Define SVG
+    var svg1 = d3
+      .select(".svg1")
+      .append("svg")
+      //.attr("width", width + margin.left + margin.right)
+      .attr("width", "63%")
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-var startDate = "1990-01-01";
-var endDate = "2010-01-01";
-var yearSelected = 2022;
+    var startDate = "1990-01-01";
+    var endDate = "2010-01-01";
+    var yearSelected = 2022;
 
-//var timelineScale = d3
-//  .scaleTime()
-//  .domain([new Date(startDate), new Date(endDate)])
-//  .range([margin.left, width + margin.left])
-//  .nice();
+    //var timelineScale = d3
+    //  .scaleTime()
+    //  .domain([new Date(startDate), new Date(endDate)])
+    //  .range([margin.left, width + margin.left])
+    //  .nice();
 
-//Define Tooltip here
-var tooltip = d3.select("body").append("div").attr("class", "tooltip");
+    //Define Tooltip here
+    var tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
-//TODO: Scale up the size of timeline axis ticks and labels to make them stand out more
-//var timelineAxis = d3
-//  .axisBottom(timelineScale)
-//  .ticks(parseInt(endDate) - parseInt(startDate));
-//
-//var timelineHeight = 100;
-//var timelinesvg = d3
-//  .select("body")
-//  .append("svg")
-//  .attr("width", main_body_width)
-//  .attr("height", timelineHeight);
-//
-//var timeX = timelinesvg
-//  .append("g")
-//  .attr("class", "timeaxis")
-//  .attr("transform", "translate(0," + 20 + ")")
-//  .call(timelineAxis);
-//
-//function timelineZoomFunc() {
-//  timeX.call(timelineAxis.scale(d3.event.transform.rescaleX(timelineScale)));
-//}
-//
-//var timelinezoom = d3
-//  .zoom()
-//  .translateExtent([
-//    [0, 0],
-//    [new Date(startDate), new Date(endDate)],
-//  ])
-//  .scaleExtent([1, 1])
-//  .on("zoom", timelineZoomFunc);
+    //TODO: Scale up the size of timeline axis ticks and labels to make them stand out more
+    //var timelineAxis = d3
+    //  .axisBottom(timelineScale)
+    //  .ticks(parseInt(endDate) - parseInt(startDate));
+    //
+    //var timelineHeight = 100;
+    //var timelinesvg = d3
+    //  .select("body")
+    //  .append("svg")
+    //  .attr("width", main_body_width)
+    //  .attr("height", timelineHeight);
+    //
+    //var timeX = timelinesvg
+    //  .append("g")
+    //  .attr("class", "timeaxis")
+    //  .attr("transform", "translate(0," + 20 + ")")
+    //  .call(timelineAxis);
+    //
+    //function timelineZoomFunc() {
+    //  timeX.call(timelineAxis.scale(d3.event.transform.rescaleX(timelineScale)));
+    //}
+    //
+    //var timelinezoom = d3
+    //  .zoom()
+    //  .translateExtent([
+    //    [0, 0],
+    //    [new Date(startDate), new Date(endDate)],
+    //  ])
+    //  .scaleExtent([1, 1])
+    //  .on("zoom", timelineZoomFunc);
 
-function driverConverter(data) {
-  return {
-    driverId: +data.driverId,
-    driverSurname: data.surname,
-    driverFirstname: data.forename,
-  };
-}
-
-function raceConverter(data) {
-  return {
-    raceId: +data.raceId,
-    year: +data.year,
-  };
-}
-
-function resultsConverter(data) {
-  return {
-    resRaceId: +data.raceId,
-    resultId: +data.resultId,
-    resDriverId: +data.driverId,
-    resConstructorId: +data.constructorId,
-  };
-}
-
-function teamConverter(data) {
-  return {
-    constructorId: +data.constructorId,
-    constructorName: data.name,
-  };
-}
-
-var drivers = [];
-d3.csv("data/drivers.csv", driverConverter).then(function (data) {
-  for (var i = 0; i < data.length; i++) {
-    drivers.push({
-      driverId: data[i].driverId,
-      driverName: data[i].driverFirstname + " " + data[i].driverSurname,
-    });
-  }
-});
-
-var races = [];
-d3.csv("data/races.csv", raceConverter).then(function (data) {
-  for (var i = 0; i < data.length; i++) {
-    races.push({ raceId: data[i].raceId, year: data[i].year });
-  }
-});
-
-var constructors = [];
-d3.csv("data/constructors.csv", teamConverter).then(function (data) {
-  for (var i = 0; i < data.length; i++) {
-    constructors.push({
-      teamId: data[i].constructorId,
-      teamName: data[i].constructorName,
-    });
-  }
-});
-
-d3.csv("data/results.csv", resultsConverter).then(function (data) {
-  for (var j = 0; j < data.length; j++) {
-    for (var i = 0; i < races.length; i++) {
-      if (
-        data[j].resRaceId == races[i]["raceId"] &&
-        races[i]["year"] == yearSelected
-      ) {
-        drivers[data[j].resDriverId - 1].teamId = data[j].resConstructorId;
-      }
+    function driverConverter(data) {
+      return {
+        driverId: +data.driverId,
+        driverSurname: data.surname,
+        driverFirstname: data.forename,
+      };
     }
-  }
-});
 
-console.log(drivers);
-console.log(races);
-console.log(constructors);
+    function raceConverter(data) {
+      return {
+        raceId: +data.raceId,
+        year: +data.year,
+      };
+    }
 
-// driverid,drivername,bestlaptime,yearbestlaptime,driverstanding,laptime2022,laptime2021,laptime2020,laptime2019
-//Get Data
+    function resultsConverter(data) {
+      return {
+        resRaceId: +data.raceId,
+        resultId: +data.resultId,
+        resDriverId: +data.driverId,
+        resConstructorId: +data.constructorId,
+      };
+    }
 
-function drawPlot() {
+    function teamConverter(data) {
+      return {
+        constructorId: +data.constructorId,
+        constructorName: data.name,
+      };
+    }
+
+    var drivers = [];
+    d3.csv("data/drivers.csv", driverConverter).then(function (data) {
+      for (var i = 0; i < data.length; i++) {
+        drivers.push({
+          driverId: data[i].driverId,
+          driverName: data[i].driverFirstname + " " + data[i].driverSurname,
+        });
+      }
+    });
+
+    var races = [];
+    d3.csv("data/races.csv", raceConverter).then(function (data) {
+      for (var i = 0; i < data.length; i++) {
+        races.push({ raceId: data[i].raceId, year: data[i].year });
+      }
+    });
+
+    var constructors = [];
+    d3.csv("data/constructors.csv", teamConverter).then(function (data) {
+      for (var i = 0; i < data.length; i++) {
+        constructors.push({
+          teamId: data[i].constructorId,
+          teamName: data[i].constructorName,
+        });
+      }
+    });
+
+    d3.csv("data/results.csv", resultsConverter).then(function (data) {
+      for (var j = 0; j < data.length; j++) {
+        for (var i = 0; i < races.length; i++) {
+          if (
+            data[j].resRaceId == races[i]["raceId"] &&
+            races[i]["year"] == yearSelected
+          ) {
+            drivers[data[j].resDriverId - 1].teamId = data[j].resConstructorId;
+          }
+        }
+      }
+    });
+
+    console.log(drivers);
+    console.log(races);
+    console.log(constructors);
+    
+    function drawPlot() {
   //Define Scales
   var xScale = d3.scaleLinear().range([0, width]);
 
@@ -382,6 +381,16 @@ function drawPlot() {
           );
       })
 
+      .on("click", function (d) {
+        if(!lineData.includes(d.drivername)){
+            lineData.push(d.drivername);
+        }
+        else{
+            lineData.splice(lineData.indexOf(d.drivername), 1);
+        }
+        console.log(lineData);
+      })
+      
       // Makes the tooltip follow the mouse when it is moved
       .on("mousemove", function (d) {
         tooltip
@@ -633,3 +642,7 @@ function toggleDarkMode() {
     //    timelinesvg.selectAll(".timeaxis").attr("color", "black");
   }
 }
+}
+drawMainGraph();
+drawLineChart();
+
