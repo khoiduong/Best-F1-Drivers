@@ -195,11 +195,11 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
     .text("Points")
     .attr("font-size", "14px");
 
-  // Adding the Year label on y axis
+  // Adding the Year label on x axis
   svg2
     .append("text")
-    .attr("y", 0 - margin.leftx)
-    .attr("x", chart_width)
+    .attr("y", chart_height+75)
+    .attr("x", chart_width/2)
     .attr("dy", "-2.8em")
     .text("Year")
     .attr("font-size", "14px");
