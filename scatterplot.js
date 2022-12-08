@@ -28,45 +28,11 @@ var main_body_width = parseInt(d3.select("body").style("width"));
     var endDate = "2010-01-01";
     var yearSelected = 2022;
 
-    //var timelineScale = d3
-    //  .scaleTime()
-    //  .domain([new Date(startDate), new Date(endDate)])
-    //  .range([margin.left, width + margin.left])
-    //  .nice();
 
     //Define Tooltip here
     var tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
-    //TODO: Scale up the size of timeline axis ticks and labels to make them stand out more
-    //var timelineAxis = d3
-    //  .axisBottom(timelineScale)
-    //  .ticks(parseInt(endDate) - parseInt(startDate));
-    //
-    //var timelineHeight = 100;
-    //var timelinesvg = d3
-    //  .select("body")
-    //  .append("svg")
-    //  .attr("width", main_body_width)
-    //  .attr("height", timelineHeight);
-    //
-    //var timeX = timelinesvg
-    //  .append("g")
-    //  .attr("class", "timeaxis")
-    //  .attr("transform", "translate(0," + 20 + ")")
-    //  .call(timelineAxis);
-    //
-    //function timelineZoomFunc() {
-    //  timeX.call(timelineAxis.scale(d3.event.transform.rescaleX(timelineScale)));
-    //}
-    //
-    //var timelinezoom = d3
-    //  .zoom()
-    //  .translateExtent([
-    //    [0, 0],
-    //    [new Date(startDate), new Date(endDate)],
-    //  ])
-    //  .scaleExtent([1, 1])
-    //  .on("zoom", timelineZoomFunc);
+
 
     function driverConverter(data) {
       return {
