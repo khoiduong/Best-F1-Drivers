@@ -163,6 +163,7 @@ d3.csv("data/F1data.csv", rowConverter).then(function (data) {
       .text(data[x]["dName"])
       .attr("y", yScale(data[x]["dPointYears"][2022-2004][1]))
       .attr("x", chart_width + 10)
+      .style("fill", colorScale(x))
       .attr("font-size", "14px");
     // .style("opacity")
     }
