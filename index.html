@@ -6,32 +6,32 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
   </head>
-  <h1><bold>Best Formula 1 Drivers Through Time</bold></h1>
+  <h1><bold>Best Formula 1 Drivers (2004-2022)</bold></h1>
   <body>
     <div class="svg1">
-      <script type="text/javascript" src="scatterplot.js"></script>
+        <script type="text/javascript" src="MultilineChart.js"></script>
     </div>
     <div class="svg2">
-      <script type="text/javascript" src="MultilineChart.js"></script>
+      <div class="container">
+          <script type="text/javascript" src="scatterplot.js"></script>
+      </div>
+      <div class="buttons">
+        <button class="down5Year" onclick="down5Year()">-5 Year</button>
+        <button class="downYear" onclick="downYear()">-1 Year</button>
+        <button class="curYear" id="yearSelected">
+          <script>
+            document.write(yearSelected);
+          </script>
+        </button>
+        <button class="upYear" onclick="upYear()">+1 Year</button>
+        <button class="up5Year" onclick="up5Year()">+5 Year</button>
+<!--        <button class="dark_mode" onclick="temp2(); toggleDarkMode()">-->
+        <button class="dark_mode" onclick="toggleDarkMode()">
+          Toggle Dark Mode
+        </button>
+      </div>
     </div>
-    <!-- <script type="text/javascript" src="MultilineChart.js"></script> -->
 
-    <!--    Can't figure out how to separate the multilinechart and scatterplot-->
-    <!--    <script type="text/javascript" src="MultilineChart.js"></script>-->
-    <!-- <svg class="linechart" width="50%" height="600"></svg> -->
-    <button class="down5Year" onclick="down5Year()">-5 Year</button>
-    <button class="downYear" onclick="downYear()">-1 Year</button>
-    <button class="curYear" id="yearSelected">
-      <script>
-        document.write(yearSelected);
-      </script>
-    </button>
-    <button class="upYear" onclick="upYear()">+1 Year</button>
-    <button class="up5Year" onclick="up5Year()">+5 Year</button>
-    <h1></h1>
-    <button class="dark_mode" onclick="toggleDarkMode()">
-      Toggle Dark Mode
-    </button>
     <h1></h1>
   </body>
 
@@ -50,7 +50,7 @@
       Khoi Duong
       <br />
       <br />
-      In Collaberation with Suresh Lodha
+      In Collaboration with Suresh Lodha
     </div>
     <div class="designed">
       <div>Designed For:</div>
@@ -70,19 +70,39 @@
         <div>data folder</div>
       </div>
       <div class="sources">
+        <div>Data Sources:</div>
+        <div>
         <a
           href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020"
-          >Data (1950-2022)</a
+          >CSV Data (1950-2022)</a
+        >
+        </div>
+        <a
+          href="https://www.formula1.com/en/results.html/2022/drivers.html"
+          >F1 Driver Standings (1950-2022)</a
         >
       </div>
       <div class="vizsources">
-        <a href="https://bl.ocks.org/mbostock/3887118">Scatterplot</a>
-      </div>
-      <div class="codesources">
+        <div>Visualization Sources:</div>
+        <div>
         <a
           href="https://www.motorsportstats.com/series/formula-one/summary/2022"
           >F1 Motorsports Statistics</a
         >
+        </div>
+            <a href="https://jasonjpaul.squarespace.com/formula-1-data-vis"
+           >F1 Hierarchical Edge Bundling Example</a>
+        <div>
+            <a href="https://rpubs.com/alisial/formula1-analysis">F1 Analysis With Graphs Example</a>
+        </div>
+      </div>
+      <div class="codesources">
+        <div>Code Sources:</div>
+        <div>
+            <a href="https://bl.ocks.org/mbostock/3887118">Scatterplot</a>
+        </div>
+        <a href="https://bl.ocks.org/mbostock/3884955">Multiline Line Chart</a>
+
       </div>
     </div>
   </div>
